@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('terraform'){
             steps{
-                sh 'terraform init'
+                sh ('terraform init')
             }
         }
         stage('Kitchen') {
