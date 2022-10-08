@@ -4,7 +4,11 @@ pipeline {
         maven 'M3_8_6'
     }
     stages {
-        
+        stage('terraform'){
+            steps{
+                sh 'terraform --version'
+            }
+        }
         stage('Kitchen') {
             when {
                 anyOf {
