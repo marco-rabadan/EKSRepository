@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('terraform'){
             steps{
-                sh 'terraform init -upgrade'
+                sh 'terraform init -lockfile=readonly'
             }
         }
         stage('Kitchen') {
