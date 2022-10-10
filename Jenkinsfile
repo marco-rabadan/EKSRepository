@@ -13,11 +13,6 @@ pipeline {
         TF_IN_AUTOMATION      = '1'
     }
     stages {
-        stage('terraform init'){
-            steps{
-                sh 'terraform init'
-            }
-        }
         stage('Apply') {
             when {
                 not {
