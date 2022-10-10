@@ -8,16 +8,15 @@ terraform {
 }
 
 provider "aws" {
-  region  = "us-west-2"
+  region  = "us-east-1"
   access_key = "<access_key>"
   secret_key = "<secret_key>"
 }
 
-resource "aws_instance" "app_server" {
-  ami           = "ami-08d70e59c07c61a3a"
+resource "aws_instance" "app_server_jenkins" {
   instance_type = "t2.micro"
 
   tags = {
-    Name = "ExampleAppServerInstance"
+    Name = "app_jenkins"
   }
 }

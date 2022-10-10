@@ -10,11 +10,21 @@ pipeline {
         TF_IN_AUTOMATION      = '1'
     }
     stages {
-        stage('terraform'){
+        stage('terraform init'){
             steps{
                 sh 'terraform init'
             }
         }
+        stage('terraform Apply'){
+            steps{
+                sh 'terraform apply --auto-approve'
+            }
+        }
+        //stage('terraform Destroy'){
+        //    steps{
+        //        sh 'terraform destroy --auto-approve'
+        //    }
+        //}
         stage('Kitchen') {
             when {
                 anyOf {
