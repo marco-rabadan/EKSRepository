@@ -4,6 +4,9 @@ pipeline {
         maven 'M3_8_6'
         terraform 'Terraform'
     }
+    parameters {
+        booleanParam(name: 'destroy', defaultValue: false, description: 'Destroy Terraform build?')
+    }
     environment {
         AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
@@ -15,16 +18,24 @@ pipeline {
                 sh 'terraform init'
             }
         }
-        stage('terraform Apply'){
-            steps{
-                sh 'terraform apply --auto-approve'
+        stage('Apply') {
+            when {
+                not {
+                    equals expected: true, actual: params.destroy
+                }
+            }
+            steps {
+                sh "terraform apply --auto-approve"
             }
         }
-        //stage('terraform Destroy'){
-        //    steps{
-        //        sh 'terraform destroy --auto-approve'
-        //    }
-        //}
+        stage('Destroy') {
+            when {
+                equals expected: true, actual: params.destroy
+            }
+            steps {
+                sh "terraform destroy --auto-approve"
+            }
+        }
         stage('Kitchen') {
             when {
                 anyOf {
