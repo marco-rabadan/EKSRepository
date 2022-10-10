@@ -2,6 +2,7 @@ pipeline {
     agent any
     tools {
         maven 'M3_8_6'
+        terraform 'terraform'
     }
     environment {
         AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
