@@ -3,7 +3,8 @@ terraform {
 
 provider "aws" {
   region  = "us-west-2"
-  profile = "jimena-eks"
+  access_key = "<access_key>"
+  secret_key = "<secret_key>"
 }
 
 resource "aws_instance" "app_server" {
