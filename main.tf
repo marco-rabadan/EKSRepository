@@ -1,4 +1,5 @@
 terraform {
+  version = "~> 4.16"
 }
 
 provider "aws" {
