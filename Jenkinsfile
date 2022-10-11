@@ -16,6 +16,7 @@ pipeline {
         IMAGE_REPO_NAME         = "ECR_REPO_NAME"
         IMAGE_TAG               = "IMAGE_TAG"
         REPOSITORY_URI          = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
+        registry = '262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service:latest'
     }
     stages {
         /*stage('Apply') {
@@ -36,16 +37,22 @@ pipeline {
                 sh "terraform destroy --auto-approve"
             }
         }*/
+        stage("Docker Build") {
+            steps {
+                sh "docker build -t kitchen-service:latest ."
+            }
+        }
         stage('Logging into AWS ECR') {
             steps {
                 withAWS(credentials: 'ecr-credentials', region: 'us-east-1') {
                     dir("kitchen-service/"){
                         script {
                             def login = ecrLogin()
-                            echo login;
-                            sh '''docker build -t kitchen-service .'''
-                            sh '''docker tag kitchen-service:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service:v1'''
-                            sh '''docker push 262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service:v1'''
+                            sh "${login}"
+                            //sh '''docker build -t kitchen-service .'''
+                            //sh '''docker tag kitchen-service:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service:v1'''
+                            //sh '''docker push 262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service:v1'''
+                            //sh '''(Get-ECRLoginCommand).Password | docker login --username AWS --password-stdin 262583979852.dkr.ecr.us-east-1.amazonaws.com'''
                         }
                     }
                 }
@@ -56,6 +63,12 @@ pipeline {
                     sh "'docker login --username AWS -p password 262583979852.dkr.ecr.us-east-1.amazonaws.com'"
                 }*/
                  
+            }
+            
+        }
+        stage("Docker Push") {
+            steps {
+                sh "docker push ${registry}"
             }
         }
         /*stage('Kitchen') {
