@@ -42,6 +42,7 @@ pipeline {
                     script {
                         def login = ecrLogin()
                         echo login;
+                        docker build -t kitchen-service .
                     }
                 }
 
