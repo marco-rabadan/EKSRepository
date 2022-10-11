@@ -39,7 +39,9 @@ pipeline {
         stage('Logging into AWS ECR') {
             steps {
                 withAWS(credentials: 'ecr-credentials', region: 'us-east-1') {
-                    def login = ecrLogin()
+                    script {
+                        def login = ecrLogin()
+                    }
                 }
 
                 /*script {
