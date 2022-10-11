@@ -16,7 +16,7 @@ pipeline {
         IMAGE_REPO_NAME         = "ECR_REPO_NAME"
         IMAGE_TAG               = "IMAGE_TAG"
         REPOSITORY_URI          = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
-        registry = '262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service:latest'
+        registry = '262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service:v1'
     }
     stages {
         /*stage('Apply') {
@@ -52,7 +52,7 @@ pipeline {
                             def login = ecrLogin()
                             sh "${login}"
                             //sh '''docker build -t kitchen-service .'''
-                            //sh '''docker tag kitchen-service:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service:v1'''
+                            sh '''docker tag kitchen-service:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service:v1'''
                             //sh '''docker push 262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service:v1'''
                             //sh '''(Get-ECRLoginCommand).Password | docker login --username AWS --password-stdin 262583979852.dkr.ecr.us-east-1.amazonaws.com'''
                         }
