@@ -1,3 +1,4 @@
+@Library('github.com/releaseworks/jenkinslib') _
 pipeline {
     agent any
     tools {
@@ -38,11 +39,15 @@ pipeline {
         }*/
         stage('Logging into AWS ECR') {
             steps {
-                script {
+                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                    AWS("--region=us-east-1 s3 ls")
+                }
+
+                /*script {
                     //sh "aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
                     sh "aws ecr get-login-password --region us-east-1"
                     sh "'docker login --username AWS -p password 262583979852.dkr.ecr.us-east-1.amazonaws.com'"
-                }
+                }*/
                  
             }
         }
