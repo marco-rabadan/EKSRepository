@@ -41,7 +41,7 @@ pipeline {
                 withAWS(credentials: 'ecr-credentials', region: 'us-east-1') {
                     script {
                         def login = ecrLogin()
-                        echo ${login};
+                        echo login;
                     }
                 }
 
