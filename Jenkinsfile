@@ -44,6 +44,8 @@ pipeline {
                             def login = ecrLogin()
                             echo login;
                             sh '''docker build -t kitchen-service .'''
+                            sh '''docker tag kitchen-service:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service:v1'''
+                            sh '''docker push 262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service:v1'''
                         }
                     }
                 }
