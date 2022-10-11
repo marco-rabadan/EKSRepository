@@ -51,7 +51,7 @@ pipeline {
                  
             }
         }
-        stage('Kitchen') {
+        /*stage('Kitchen') {
             when {
                 anyOf {
                     changeset "*kitchen-service/**"
@@ -67,6 +67,6 @@ pipeline {
                     }
                 }
             }
-        }
+        }*/
     }
 }
