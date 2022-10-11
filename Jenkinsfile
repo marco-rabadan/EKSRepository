@@ -39,7 +39,8 @@ pipeline {
         stage('Logging into AWS ECR') {
             steps {
                 withAWS(credentials: 'ecr-credentials', region: 'us-east-1') {
-                    sh 'aws s3 ls'
+                    sh 'echo "hello KB">hello.txt'
+                    s3Upload acl: 'Private', bucket: 'kb-bucket-wqdwdq', file: 'hello.txt'
                 }
 
                 /*script {
