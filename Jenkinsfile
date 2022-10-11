@@ -39,13 +39,15 @@ pipeline {
         }*/
         stage("Docker Build") {
             steps {
-                sh "docker build -t kitchen-service:latest ."
+                dir("kitchen-service/"){
+                    sh "docker build -t kitchen-service:latest ."
+                }
             }
         }
         stage('Logging into AWS ECR') {
             steps {
                 withAWS(credentials: 'ecr-credentials', region: 'us-east-1') {
-                    dir("kitchen-service/"){
+                    //dir("kitchen-service/"){
                         script {
                             def login = ecrLogin()
                             sh "${login}"
@@ -54,7 +56,7 @@ pipeline {
                             //sh '''docker push 262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service:v1'''
                             //sh '''(Get-ECRLoginCommand).Password | docker login --username AWS --password-stdin 262583979852.dkr.ecr.us-east-1.amazonaws.com'''
                         }
-                    }
+                    //}
                 }
 
                 /*script {
