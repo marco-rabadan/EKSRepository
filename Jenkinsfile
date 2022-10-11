@@ -39,8 +39,8 @@ pipeline {
         }*/
         stage('Logging into AWS ECR') {
             steps {
-                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                    AWS("--region=us-east-1 s3 ls")
+                withAWS(credentials: 'ecr-credentials', region: 'us-east-1') {
+                    sh 'aws s3 ls'
                 }
 
                 /*script {
