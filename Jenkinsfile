@@ -39,10 +39,12 @@ pipeline {
         stage('Logging into AWS ECR') {
             steps {
                 withAWS(credentials: 'ecr-credentials', region: 'us-east-1') {
-                    script {
-                        def login = ecrLogin()
-                        echo login;
-                        sh '''docker build -t kitchen-service .'''
+                    dir("kitchen-service/"){
+                        script {
+                            def login = ecrLogin()
+                            echo login;
+                            sh '''docker build -t kitchen-service .'''
+                        }
                     }
                 }
 
