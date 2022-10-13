@@ -19,7 +19,7 @@ pipeline {
         registry = '262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service:v1'
     }
     stages {
-        /*stage('Apply') {
+        stage('Apply') {
             when {
                 not {
                     equals expected: true, actual: params.destroy
@@ -37,7 +37,7 @@ pipeline {
                 sh "terraform destroy --auto-approve"
             }
         }
-        stage("Docker Build") {
+        /*stage("Docker Build") {
             steps {
                 dir("kitchen-service/"){
                     sh "docker build -t kitchen-service:latest ."
@@ -62,7 +62,7 @@ pipeline {
                 sh "docker push ${registry}"
             }
         }*/
-        stage("Kubectl") {
+        /*stage("Kubectl") {
             steps {
                 withKubeConfig([credentialsId: 'aws-key', clusterName: 'cluster-name']) {
                     //dir("kitchen-service/"){
@@ -72,7 +72,7 @@ pipeline {
                     //}
                 }
             }
-        }
+        }*/
         /*stage('Kitchen') {
             when {
                 anyOf {
