@@ -36,7 +36,7 @@ pipeline {
             steps {
                 sh "terraform destroy --auto-approve"
             }
-        }*/
+        }
         stage("Docker Build") {
             steps {
                 dir("kitchen-service/"){
@@ -51,26 +51,20 @@ pipeline {
                         script {
                             def login = ecrLogin()
                             sh "${login}"
-                            //sh '''docker build -t kitchen-service .'''
                             sh '''docker tag kitchen-service:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service:v1'''
-                            //sh '''docker push 262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service:v1'''
-                            //sh '''(Get-ECRLoginCommand).Password | docker login --username AWS --password-stdin 262583979852.dkr.ecr.us-east-1.amazonaws.com'''
                         }
                     //}
                 }
-
-                /*script {
-                    //sh "aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
-                    sh "aws ecr get-login-password --region us-east-1"
-                    sh "'docker login --username AWS -p password 262583979852.dkr.ecr.us-east-1.amazonaws.com'"
-                }*/
-                 
             }
-            
         }
         stage("Docker Push") {
             steps {
                 sh "docker push ${registry}"
+            }
+        }*/
+        stage("Kubectl") {
+            steps {
+                sh "kubectl --help"
             }
         }
         /*stage('Kitchen') {

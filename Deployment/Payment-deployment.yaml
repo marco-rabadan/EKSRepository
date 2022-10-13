@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payment-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: payment-pod
+  template:
+    metadata:
+      labels:
+        app: payment-pod
+    spec:
+      containers:
+      - name: payment-container
+        image: ingjavierr/payment-service:latest
+        ports:
+        - containerPort: 8300
+        imagePullPolicy: Always
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: qa
+        - name: TZ
+          value: America/Mexico_City
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: payment-svc
+spec:
+  selector:
+    app: payment-pod
+  ports:
+  - port: 8300
+    protocol: TCP
+    targetPort: 8300
+  type: ClusterIP
