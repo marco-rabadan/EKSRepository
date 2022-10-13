@@ -64,10 +64,10 @@ pipeline {
         }*/
         stage("Kubectl") {
             steps {
-                withKubeConfig([credentialsId: 'aws-key']) {
+                withKubeConfig([credentialsId: 'aws-key', clusterName: 'cluster-name']) {
                     //dir("kitchen-service/"){
                         script {
-                            sh "kubectl --help"
+                            sh "kubectl get pods"
                         }
                     //}
                 }
