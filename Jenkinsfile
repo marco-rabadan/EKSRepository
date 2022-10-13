@@ -27,6 +27,7 @@ pipeline {
             }
             steps {
                 sh "terraform apply --auto-approve"
+                sh "${terraform.sqstestid}"
             }
         }
         stage('Destroy') {
