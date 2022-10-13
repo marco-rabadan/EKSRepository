@@ -64,7 +64,13 @@ pipeline {
         }*/
         stage("Kubectl") {
             steps {
-                sh "kubectl --help"
+                withKubeConfig([credentialsId: 'ecr-credentials']) {
+                    //dir("kitchen-service/"){
+                        script {
+                            sh "kubectl --help"
+                        }
+                    //}
+                }
             }
         }
         /*stage('Kitchen') {
