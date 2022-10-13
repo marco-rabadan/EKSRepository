@@ -64,7 +64,7 @@ pipeline {
         }*/
         stage("Kubectl") {
             steps {
-                withKubeConfig([credentialsId: 'ecr-credentials']) {
+                withKubeConfig([credentialsId: 'aws-key']) {
                     //dir("kitchen-service/"){
                         script {
                             sh "kubectl --help"
