@@ -7,7 +7,6 @@ import mx.com.example.services.facade.IPaymentFacade;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 import org.springframework.cloud.aws.messaging.listener.annotation.SqsListener;
 
