@@ -27,7 +27,6 @@ pipeline {
             }
             steps {
                 sh "terraform apply --auto-approve"
-                sh "${terraform.sqstestid}"
             }
         }
         stage('Destroy') {
@@ -38,14 +37,14 @@ pipeline {
                 sh "terraform destroy --auto-approve"
             }
         }
-        /*stage("Docker Build") {
+        stage("Docker Build") {
             steps {
-                dir("kitchen-service/"){
-                    sh "docker build -t kitchen-service:latest ."
+                dir("payment-service/"){
+                    sh "docker build -t payment-service:latest ."
                 }
             }
         }
-        stage('Logging into AWS ECR') {
+        /*stage('Logging into AWS ECR') {
             steps {
                 withAWS(credentials: 'ecr-credentials', region: 'us-east-1') {
                     //dir("kitchen-service/"){
