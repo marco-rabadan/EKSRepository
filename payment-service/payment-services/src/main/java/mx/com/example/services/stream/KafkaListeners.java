@@ -7,11 +7,10 @@ import mx.com.example.services.facade.IPaymentFacade;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.aws.messaging.listener.annotation.SqsListener;
 import org.springframework.stereotype.Component;
 import org.springframework.messaging.handler.annotation.MessageExceptionHandler;
 import org.springframework.messaging.support.MessageBuilder;
-import org.springframework.cloud.aws.messaging.listener.annotation;
-
 
 @Component
 public class KafkaListeners {

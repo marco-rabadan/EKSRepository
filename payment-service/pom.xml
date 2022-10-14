@@ -34,11 +34,11 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <jacoco.version>0.8.4</jacoco.version>
         <lombok.version>1.18.8</lombok.version>
-        <spring-cloud-starter-aws.version>2.2.1.RELEASE</spring-cloud-starter-aws.version>
+        <spring-cloud-starter-aws.version>2.2.6.RELEASE</spring-cloud-starter-aws.version>
         <spring-boot-starter-web.version>2.2.1.RELEASE</spring-boot-starter-web.version>
-        <spring-cloud-starter-aws-messaging.version>2.2.1.RELEASE</spring-cloud-starter-aws-messaging.version>
+        <spring-cloud-starter-aws-messaging.version>2.2.6.RELEASE</spring-cloud-starter-aws-messaging.version>
         <spring-cloud-aws.version>Hoxton.SR8</spring-cloud-aws.version>
-        <aws-java-sdk-sqs.version>1.12.320</aws-java-sdk-sqs.version>
+        <awsjavasdk.version>1.12.320</awsjavasdk.version>
         <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
         <sonar.coverage.exclusions>
             **/example/web/**/*,
@@ -87,7 +87,14 @@
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
-                <version>Hoxton.SR8</version>
+                <version>2021.0.4</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-parent</artifactId>
+                <version>2021.0.4</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -99,7 +106,7 @@
             <dependency>
                 <groupId>com.amazonaws</groupId>
                 <artifactId>aws-java-sdk-sqs</artifactId>
-                <version>${aws-java-sdk-sqs.version}</version>
+                <version>${awsjavasdk.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.springfox</groupId>
