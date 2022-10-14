@@ -34,10 +34,10 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <jacoco.version>0.8.4</jacoco.version>
         <lombok.version>1.18.8</lombok.version>
-        <starterweb.version>2.7.0</starterweb.version>
-        <starteraws>2.7.0</starteraws>
-        <awsmessaging.version>2.7.0</awsmessaging.version>
-        <spring-cloud-aws.version>2.4.1</spring-cloud-aws.version>
+        <starterweb.version>2.4.1</starterweb.version>
+        <starteraws>2.4.1</starteraws>
+        <awsmessaging.version>2.2.6.RELEASE</awsmessaging.version>
+        <spring-cloud-aws.version>Hoxton.SR8</spring-cloud-aws.version>
         <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
         <sonar.coverage.exclusions>
             **/example/web/**/*,
@@ -86,7 +86,7 @@
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
-                <version>Greenwich.RELEASE</version>
+                <version>Hoxton.SR8</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

@@ -8,6 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.cloud.aws.messaging.core.NotificationMessagingTemplate;
 
 @Component
 public class KafkaListeners {
@@ -17,7 +18,7 @@ public class KafkaListeners {
     @Autowired
     private IPaymentFacade paymentFacade;
 
-    @SqsListener(value = "ticket_events")
+    @SqsListener("ticket_events")
     public void ticketEvents(String message) throws JsonProcessingException {
 
         TicketEventTO ticket = new ObjectMapper().readValue(message, TicketEventTO.class);
