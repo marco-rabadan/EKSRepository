@@ -19,7 +19,7 @@ pipeline {
         registry = '262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service:v1'
     }
     stages {
-        stage('Apply') {
+        /*stage('Apply') {
             when {
                 not {
                     equals expected: true, actual: params.destroy
@@ -28,7 +28,7 @@ pipeline {
             steps {
                 sh "terraform apply --auto-approve"
             }
-        }
+        }*/
         stage('Destroy') {
             when {
                 equals expected: true, actual: params.destroy
