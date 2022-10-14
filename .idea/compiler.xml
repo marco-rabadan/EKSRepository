@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="payment-model" />
+        <module name="payment-web" />
+        <module name="payment-services" />
+        <module name="kitchen-services" />
+        <module name="kitchen-model" />
+        <module name="kitchen-persistence" />
+        <module name="kitchen-web" />
+        <module name="payment-persistence" />
+        <module name="kitchen-commons" />
+        <module name="payment-commons" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="kitchen" target="1.8" />
+      <module name="kitchen-commons" target="1.8" />
+      <module name="kitchen-model" target="1.8" />
+      <module name="kitchen-persistence" target="1.8" />
+      <module name="kitchen-services" target="1.8" />
+      <module name="kitchen-web" target="1.8" />
+      <module name="payment" target="1.8" />
+      <module name="payment-commons" target="1.8" />
+      <module name="payment-model" target="1.8" />
+      <module name="payment-persistence" target="1.8" />
+      <module name="payment-services" target="1.8" />
+      <module name="payment-web" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

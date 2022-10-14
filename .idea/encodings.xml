@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/kitchen-service/kitchen-commons/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/kitchen-service/kitchen-commons/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/kitchen-service/kitchen-model/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/kitchen-service/kitchen-model/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/kitchen-service/kitchen-persistence/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/kitchen-service/kitchen-persistence/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/kitchen-service/kitchen-services/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/kitchen-service/kitchen-services/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/kitchen-service/kitchen-web/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/kitchen-service/kitchen-web/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/kitchen-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/kitchen-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/payment-service/payment-commons/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/payment-service/payment-commons/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/payment-service/payment-model/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/payment-service/payment-model/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/payment-service/payment-persistence/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/payment-service/payment-persistence/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/payment-service/payment-services/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/payment-service/payment-services/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/payment-service/payment-web/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/payment-service/payment-web/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/payment-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/payment-service/src/main/resources" charset="UTF-8" />
+  </component>
+</project>

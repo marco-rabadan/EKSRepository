@@ -1,5 +1,6 @@
 package mx.com.example.services.facade.impl;
 
+import mx.com.example.commons.stream.SqsQueueSender;
 import mx.com.example.commons.to.PaymentEventTO;
 import mx.com.example.commons.to.TicketEventTO;
 import mx.com.example.commons.to.UserTO;
@@ -18,6 +19,7 @@ public class PaymentFacade implements IPaymentFacade {
 
     @Autowired
     private KafkaTemplate kafkaTemplate;
+    private SqsQueueSender sqsQueueSender;
 
     public List<UserTO> getAllUsers() {
         return this.paymentService.getUsers();
@@ -27,9 +29,9 @@ public class PaymentFacade implements IPaymentFacade {
     public PaymentEventTO authorizeCard(TicketEventTO ticketEvent) {
 
         PaymentEventTO paymentEvent = new PaymentEventTO();
-        
 
-        kafkaTemplate.send("payment_events", paymentEvent);
+        //kafkaTemplate.send("payment_events", paymentEvent);
+        sqsQueueSender.send("payment_events", paymentEvent.toString());
         return paymentEvent;
     }
 }

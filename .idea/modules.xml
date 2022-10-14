@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/jenkins.iml" filepath="$PROJECT_DIR$/.idea/jenkins.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kitchen-service/kitchen.iml" filepath="$PROJECT_DIR$/kitchen-service/kitchen.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kitchen-service/kitchen-commons/kitchen-commons.iml" filepath="$PROJECT_DIR$/kitchen-service/kitchen-commons/kitchen-commons.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kitchen-service/kitchen-model/kitchen-model.iml" filepath="$PROJECT_DIR$/kitchen-service/kitchen-model/kitchen-model.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kitchen-service/kitchen-persistence/kitchen-persistence.iml" filepath="$PROJECT_DIR$/kitchen-service/kitchen-persistence/kitchen-persistence.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kitchen-service/kitchen-services/kitchen-services.iml" filepath="$PROJECT_DIR$/kitchen-service/kitchen-services/kitchen-services.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kitchen-service/kitchen-web/kitchen-web.iml" filepath="$PROJECT_DIR$/kitchen-service/kitchen-web/kitchen-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/payment-service/payment.iml" filepath="$PROJECT_DIR$/payment-service/payment.iml" />
+      <module fileurl="file://$PROJECT_DIR$/payment-service/payment-commons/payment-commons.iml" filepath="$PROJECT_DIR$/payment-service/payment-commons/payment-commons.iml" />
+      <module fileurl="file://$PROJECT_DIR$/payment-service/payment-model/payment-model.iml" filepath="$PROJECT_DIR$/payment-service/payment-model/payment-model.iml" />
+      <module fileurl="file://$PROJECT_DIR$/payment-service/payment-persistence/payment-persistence.iml" filepath="$PROJECT_DIR$/payment-service/payment-persistence/payment-persistence.iml" />
+      <module fileurl="file://$PROJECT_DIR$/payment-service/payment-services/payment-services.iml" filepath="$PROJECT_DIR$/payment-service/payment-services/payment-services.iml" />
+      <module fileurl="file://$PROJECT_DIR$/payment-service/payment-web/payment-web.iml" filepath="$PROJECT_DIR$/payment-service/payment-web/payment-web.iml" />
+    </modules>
+  </component>
+</project>

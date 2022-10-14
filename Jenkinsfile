@@ -19,7 +19,7 @@ pipeline {
         registry = '262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service:v1'
     }
     stages {
-        /*stage('Apply') {
+        stage('Create Infra') {
             when {
                 not {
                     equals expected: true, actual: params.destroy
@@ -28,8 +28,8 @@ pipeline {
             steps {
                 sh "terraform apply --auto-approve"
             }
-        }*/
-        stage('Destroy') {
+        }
+        stage('Destroy Infra') {
             when {
                 equals expected: true, actual: params.destroy
             }
@@ -44,7 +44,7 @@ pipeline {
                 }
             }
         }
-        /*stage('Logging into AWS ECR') {
+        stage('Logging into AWS ECR') {
             steps {
                 withAWS(credentials: 'ecr-credentials', region: 'us-east-1') {
                     //dir("kitchen-service/"){
@@ -61,7 +61,7 @@ pipeline {
             steps {
                 sh "docker push ${registry}"
             }
-        }*/
+        }
         /*stage("Kubectl") {
             steps {
                 withKubeConfig([credentialsId: 'aws-key', clusterName: 'cluster-name']) {
