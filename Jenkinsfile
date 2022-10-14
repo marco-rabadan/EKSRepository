@@ -16,7 +16,7 @@ pipeline {
         IMAGE_REPO_NAME         = "ECR_REPO_NAME"
         IMAGE_TAG               = "IMAGE_TAG"
         REPOSITORY_URI          = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
-        registry = '262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service:v1'
+        registry_payment = '262583979852.dkr.ecr.us-east-1.amazonaws.com/payment-service:v1'
     }
     stages {
         stage('Create Infra') {
@@ -26,7 +26,9 @@ pipeline {
                 }
             }
             steps {
-                sh "terraform apply --auto-approve"
+                dir("infra/"){
+                    sh "terraform apply --auto-approve"
+                }
             }
         }
         stage('Destroy Infra') {
@@ -34,7 +36,9 @@ pipeline {
                 equals expected: true, actual: params.destroy
             }
             steps {
-                sh "terraform destroy --auto-approve"
+                dir("infra/"){
+                    sh "terraform destroy --auto-approve"
+                }
             }
         }
         stage("Docker Build") {
@@ -47,19 +51,19 @@ pipeline {
         stage('Logging into AWS ECR') {
             steps {
                 withAWS(credentials: 'ecr-credentials', region: 'us-east-1') {
-                    //dir("kitchen-service/"){
+                    dir("payment-service/"){
                         script {
                             def login = ecrLogin()
                             sh "${login}"
-                            sh '''docker tag kitchen-service:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service:v1'''
+                            sh '''docker tag payment-service:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/payment-service:v1'''
                         }
-                    //}
+                    }
                 }
             }
         }
         stage("Docker Push") {
             steps {
-                sh "docker push ${registry}"
+                sh "docker push ${registry_payment}"
             }
         }
         /*stage("Kubectl") {
