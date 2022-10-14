@@ -1,10 +1,5 @@
 resource "aws_sqs_queue" "terraform_queue" {
-  name                        = "terraform-example-queue.fifo"
-  fifo_queue                  = true
-}
-
-resource "aws_sqs_queue" "terraform_queue_test" {
-  name                        = "terraform_queue_test.fifo"
+  name                        = "ticket_events.fifo"
   fifo_queue                  = true
 }
 
