@@ -12,7 +12,3 @@ output "sqsarn" {
 output "sqsid" {
   value = aws_sqs_queue.terraform_queue.id
 }
-
-output "sqstestid" {
-  value = aws_sqs_queue.terraform_queue_test.id
-}
