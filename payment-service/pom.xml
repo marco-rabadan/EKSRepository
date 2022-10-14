@@ -34,6 +34,9 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <jacoco.version>0.8.4</jacoco.version>
         <lombok.version>1.18.8</lombok.version>
+        <starterweb.version>2.2.1</starterweb.version>
+        <starteraws>2.2.1</starteraws>
+        <awsmessaging.version>2.2.1</awsmessaging.version>
         <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
         <sonar.coverage.exclusions>
             **/example/web/**/*,
@@ -147,14 +150,17 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-web</artifactId>
+                <version>${starterweb.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-starter-aws</artifactId>
+                <version>${starteraws.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-aws-messaging</artifactId>
+                <version>${awsmessaging.version}</version>
             </dependency>
 
 
