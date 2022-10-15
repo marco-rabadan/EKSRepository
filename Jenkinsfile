@@ -17,9 +17,9 @@ pipeline {
         IMAGE_REPO_NAME         = "ECR_REPO_NAME"
         IMAGE_TAG               = "IMAGE_TAG"
         REPOSITORY_URI          = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
-        registry_payment        = '262583979852.dkr.ecr.us-east-1.amazonaws.com/payment-service:v2'
-        registry_order          = '262583979852.dkr.ecr.us-east-1.amazonaws.com/order-service:v2'
-        registry_kitchen        = '262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service:v2'
+        registry_payment        = '262583979852.dkr.ecr.us-east-1.amazonaws.com/payment-service:v3'
+        registry_order          = '262583979852.dkr.ecr.us-east-1.amazonaws.com/order-service:v3'
+        registry_kitchen        = '262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service:v3'
     }
     stages {
         stage('Create Infra') {
@@ -62,9 +62,9 @@ pipeline {
                         script {
                             def login = ecrLogin()
                             sh "${login}"
-                            sh '''docker tag payment-service:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/payment-service:v2'''
-                            sh '''docker tag order-service:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/order-service:v2'''
-                            sh '''docker tag kitchen-service:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service:v2'''
+                            sh '''docker tag payment-service:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/payment-service:v3'''
+                            sh '''docker tag order-service:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/order-service:v3'''
+                            sh '''docker tag kitchen-service:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service:v3'''
                         }
                 }
             }

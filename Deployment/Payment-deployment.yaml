@@ -35,4 +35,4 @@ spec:
   - port: 8300
     protocol: TCP
     targetPort: 8300
-  type: ClusterIP
+  type: LoadBalancer
