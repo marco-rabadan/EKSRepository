@@ -43,7 +43,7 @@ pipeline {
                 }
             }
         }
-        stage("Docker Build") {
+        /*stage("Docker Build") {
             steps {
                 dir("payment-service/"){
                     sh "docker build --cache-from payment-service:latest -t payment-service:latest ."
