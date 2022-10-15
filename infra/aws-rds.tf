@@ -6,7 +6,6 @@ resource "aws_db_instance" "terraform_rds" {
   instance_class       = "db.t3.micro"
   username             = "postgresql1"
   password             = "foopwdpost!"
-  parameter_group_name = "default.mysql5.7"
 }
 
 output "rdsdbname" {
