@@ -19,6 +19,14 @@ pipeline {
         registry_payment = '262583979852.dkr.ecr.us-east-1.amazonaws.com/payment-service:v1'
     }
     stages {
+         stage('Hello') {
+            steps {
+                withAWS(credentials: 'ecr-credentials', region: 'us-east-1') {
+                    sh 'aws eks --region us-east-1 update-kubeconfig --name eks-cluster-test'
+                    sh 'kubectl get pods'
+                }
+            }
+        }
         /*stage('Create Infra') {
             when {
                 not {
@@ -28,7 +36,7 @@ pipeline {
             steps {
                 sh "terraform apply --auto-approve"
             }
-        }*/
+        }
         stage('Destroy Infra') {
             when {
                 equals expected: true, actual: params.destroy
@@ -42,7 +50,7 @@ pipeline {
         stage("Docker Build") {
             steps {
                 dir("payment-service/"){
-                    sh "docker build -t payment-service:latest ."
+                    sh "docker build --cache-from payment-service:latest -t payment-service:latest ."
                 }
             }
         }
