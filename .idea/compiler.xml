@@ -6,16 +6,21 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="order-web" />
+        <module name="order-commons" />
+        <module name="kitchen-persistence" />
+        <module name="payment-persistence" />
+        <module name="order-persistence" />
+        <module name="order-services" />
         <module name="payment-model" />
         <module name="payment-web" />
         <module name="payment-services" />
         <module name="kitchen-services" />
         <module name="kitchen-model" />
-        <module name="kitchen-persistence" />
         <module name="kitchen-web" />
-        <module name="payment-persistence" />
         <module name="kitchen-commons" />
         <module name="payment-commons" />
+        <module name="order-model" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -25,6 +30,12 @@
       <module name="kitchen-persistence" target="1.8" />
       <module name="kitchen-services" target="1.8" />
       <module name="kitchen-web" target="1.8" />
+      <module name="order" target="1.8" />
+      <module name="order-commons" target="1.8" />
+      <module name="order-model" target="1.8" />
+      <module name="order-persistence" target="1.8" />
+      <module name="order-services" target="1.8" />
+      <module name="order-web" target="1.8" />
       <module name="payment" target="1.8" />
       <module name="payment-commons" target="1.8" />
       <module name="payment-model" target="1.8" />

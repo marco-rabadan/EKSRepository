@@ -9,6 +9,12 @@
       <module fileurl="file://$PROJECT_DIR$/kitchen-service/kitchen-persistence/kitchen-persistence.iml" filepath="$PROJECT_DIR$/kitchen-service/kitchen-persistence/kitchen-persistence.iml" />
       <module fileurl="file://$PROJECT_DIR$/kitchen-service/kitchen-services/kitchen-services.iml" filepath="$PROJECT_DIR$/kitchen-service/kitchen-services/kitchen-services.iml" />
       <module fileurl="file://$PROJECT_DIR$/kitchen-service/kitchen-web/kitchen-web.iml" filepath="$PROJECT_DIR$/kitchen-service/kitchen-web/kitchen-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/order-service/order.iml" filepath="$PROJECT_DIR$/order-service/order.iml" />
+      <module fileurl="file://$PROJECT_DIR$/order-service/order-commons/order-commons.iml" filepath="$PROJECT_DIR$/order-service/order-commons/order-commons.iml" />
+      <module fileurl="file://$PROJECT_DIR$/order-service/order-model/order-model.iml" filepath="$PROJECT_DIR$/order-service/order-model/order-model.iml" />
+      <module fileurl="file://$PROJECT_DIR$/order-service/order-persistence/order-persistence.iml" filepath="$PROJECT_DIR$/order-service/order-persistence/order-persistence.iml" />
+      <module fileurl="file://$PROJECT_DIR$/order-service/order-services/order-services.iml" filepath="$PROJECT_DIR$/order-service/order-services/order-services.iml" />
+      <module fileurl="file://$PROJECT_DIR$/order-service/order-web/order-web.iml" filepath="$PROJECT_DIR$/order-service/order-web/order-web.iml" />
       <module fileurl="file://$PROJECT_DIR$/payment-service/payment.iml" filepath="$PROJECT_DIR$/payment-service/payment.iml" />
       <module fileurl="file://$PROJECT_DIR$/payment-service/payment-commons/payment-commons.iml" filepath="$PROJECT_DIR$/payment-service/payment-commons/payment-commons.iml" />
       <module fileurl="file://$PROJECT_DIR$/payment-service/payment-model/payment-model.iml" filepath="$PROJECT_DIR$/payment-service/payment-model/payment-model.iml" />

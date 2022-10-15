@@ -20,16 +20,17 @@ pipeline {
         registry_order = '262583979852.dkr.ecr.us-east-1.amazonaws.com/order-service:v2'
     }
     stages {
-        /*stage('Create Infra') {
+        stage('Create Infra') {
             when {
                 not {
                     equals expected: true, actual: params.destroy
                 }
             }
             steps {
+                sh "terraform init"
                 sh "terraform apply --auto-approve"
             }
-        }*/
+        }
         stage('Destroy Infra') {
             when {
                 equals expected: true, actual: params.destroy
@@ -73,6 +74,7 @@ pipeline {
                 withAWS(credentials: 'ecr-credentials', region: 'us-east-1') {
                     sh 'aws eks --region us-east-1 update-kubeconfig --name eks-cluster-test'
                     sh 'kubectl get pods'
+                    sh 'kubectl apply -f '
                 }
             }
         }
