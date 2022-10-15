@@ -27,8 +27,10 @@ pipeline {
                 }
             }
             steps {
-                sh "terraform init"
-                sh "terraform apply --auto-approve"
+                dir("infra/"){
+                    sh "terraform init"
+                    sh "terraform apply --auto-approve"
+                }
             }
         }
         stage('Destroy Infra') {
