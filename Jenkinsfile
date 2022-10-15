@@ -20,7 +20,7 @@ pipeline {
         registry_order = '262583979852.dkr.ecr.us-east-1.amazonaws.com/order-service'
     }
     stages {
-        stage('Create Infra') {
+        /*stage('Create Infra') {
             when {
                 not {
                     equals expected: true, actual: params.destroy
@@ -29,7 +29,7 @@ pipeline {
             steps {
                 sh "terraform apply --auto-approve"
             }
-        }
+        }*/
         stage('Destroy Infra') {
             when {
                 equals expected: true, actual: params.destroy
