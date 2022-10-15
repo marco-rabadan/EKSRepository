@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: kitchen-container
-        image: ingjavierr/kitchen-service:latest
+        image: 262583979852.dkr.ecr.us-east-1.amazonaws.com/payment-service:v2
         ports:
         - containerPort: 8200
         imagePullPolicy: Always
