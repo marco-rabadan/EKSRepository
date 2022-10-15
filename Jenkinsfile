@@ -57,7 +57,7 @@ pipeline {
                             def login = ecrLogin()
                             sh "${login}"
                             sh '''docker tag payment-service:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/payment-service:v1'''
-                            sh '''docker tag order-service:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/order-service:v1'''
+                            sh '''docker tag order-service:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/order-service:v2'''
                         }
                 }
             }
