@@ -19,15 +19,7 @@ pipeline {
         registry_payment = '262583979852.dkr.ecr.us-east-1.amazonaws.com/payment-service:v1'
     }
     stages {
-         stage('Hello') {
-            steps {
-                withAWS(credentials: 'ecr-credentials', region: 'us-east-1') {
-                    sh 'aws eks --region us-east-1 update-kubeconfig --name eks-cluster-test'
-                    sh 'kubectl get pods'
-                }
-            }
-        }
-        /*stage('Create Infra') {
+        stage('Create Infra') {
             when {
                 not {
                     equals expected: true, actual: params.destroy
@@ -47,7 +39,7 @@ pipeline {
                 }
             }
         }
-        stage("Docker Build") {
+        /*stage("Docker Build") {
             steps {
                 dir("payment-service/"){
                     sh "docker build --cache-from payment-service:latest -t payment-service:latest ."
@@ -70,6 +62,14 @@ pipeline {
         stage("Docker Push") {
             steps {
                 sh "docker push ${registry_payment}"
+            }
+        }
+        stage('Hello') {
+            steps {
+                withAWS(credentials: 'ecr-credentials', region: 'us-east-1') {
+                    sh 'aws eks --region us-east-1 update-kubeconfig --name eks-cluster-test'
+                    sh 'kubectl get pods'
+                }
             }
         }
         /*stage("Kubectl") {
