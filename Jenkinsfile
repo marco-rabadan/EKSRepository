@@ -6,6 +6,7 @@ pipeline {
     }
     parameters {
         booleanParam(name: 'destroy', defaultValue: false, description: 'Destroy Terraform build?')
+        booleanParam(name: 'deploy', defaultValue: false, description: 'Deploy Terraform apply?')
     }
     environment {
         AWS_ACCESS_KEY_ID       = credentials('AWS_ACCESS_KEY_ID')
@@ -16,15 +17,14 @@ pipeline {
         IMAGE_REPO_NAME         = "ECR_REPO_NAME"
         IMAGE_TAG               = "IMAGE_TAG"
         REPOSITORY_URI          = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
-        registry_payment = '262583979852.dkr.ecr.us-east-1.amazonaws.com/payment-service:v2'
-        registry_order = '262583979852.dkr.ecr.us-east-1.amazonaws.com/order-service:v2'
+        registry_payment        = '262583979852.dkr.ecr.us-east-1.amazonaws.com/payment-service:v2'
+        registry_order          = '262583979852.dkr.ecr.us-east-1.amazonaws.com/order-service:v2'
+        registry_kitchen        = '262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service:v2'
     }
     stages {
         stage('Create Infra') {
             when {
-                not {
-                    equals expected: true, actual: params.destroy
-                }
+                equals expected: true, actual: params.deploy
             }
             steps {
                 dir("infra/"){
@@ -51,6 +51,9 @@ pipeline {
                 dir("order-service/"){
                     sh "docker build --cache-from order-service:latest -t order-service:latest ."
                 }
+                dir("kitchen-service/"){
+                    sh "docker build --cache-from kitchen-service:latest -t kitchen-service:latest ."
+                }
             }
         }
         stage('Logging into AWS ECR') {
@@ -61,6 +64,7 @@ pipeline {
                             sh "${login}"
                             sh '''docker tag payment-service:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/payment-service:v2'''
                             sh '''docker tag order-service:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/order-service:v2'''
+                            sh '''docker tag kitchen-service:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service:v2'''
                         }
                 }
             }
@@ -69,6 +73,7 @@ pipeline {
             steps {
                 sh "docker push ${registry_payment}"
                 sh "docker push ${registry_order}"
+                sh "docker push ${registry_kitchen}"
             }
         }
         stage('Kubectl') {
@@ -76,7 +81,14 @@ pipeline {
                 withAWS(credentials: 'ecr-credentials', region: 'us-east-1') {
                     sh 'aws eks --region us-east-1 update-kubeconfig --name eks-cluster-test'
                     sh 'kubectl get pods'
-                    sh 'kubectl apply -f '
+                    dir("Deployment/"){
+                        sh 'kubectl apply -f Kitchen-deployment.yaml'
+                        sh 'kubectl apply -f Order-deployment.yaml'
+                        sh 'kubectl apply -f Payment-deployment.yaml'
+                        sh 'kubectl apply -f secrets.yaml'
+                        sh 'kubectl apply -f ingress-deploy.yaml'
+                        sh 'kubectl apply -f nginx_ingress_services.yaml'
+                    }
                 }
             }
         }
