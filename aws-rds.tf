@@ -9,8 +9,8 @@ resource "aws_db_instance" "terraform_rds" {
   parameter_group_name = "default.mysql5.7"
 }
 
-output "rdsurl" {
-  value = aws_db_instance.terraform_rds.url
+output "rdsdbname" {
+  value = aws_db_instance.terraform_rds.db_name
 }
 output "rdsarn" {
   value = aws_db_instance.terraform_rds.arn
