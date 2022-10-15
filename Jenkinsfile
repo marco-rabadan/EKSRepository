@@ -17,7 +17,7 @@ pipeline {
         IMAGE_TAG               = "IMAGE_TAG"
         REPOSITORY_URI          = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
         registry_payment = '262583979852.dkr.ecr.us-east-1.amazonaws.com/payment-service:v2'
-        registry_order = '262583979852.dkr.ecr.us-east-1.amazonaws.com/order-service:v1'
+        registry_order = '262583979852.dkr.ecr.us-east-1.amazonaws.com/order-service:v2'
     }
     stages {
         /*stage('Create Infra') {
@@ -56,7 +56,7 @@ pipeline {
                         script {
                             def login = ecrLogin()
                             sh "${login}"
-                            sh '''docker tag payment-service:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/payment-service:v1'''
+                            sh '''docker tag payment-service:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/payment-service:v2'''
                             sh '''docker tag order-service:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/order-service:v2'''
                         }
                 }
