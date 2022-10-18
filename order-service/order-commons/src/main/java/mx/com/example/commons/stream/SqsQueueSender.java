@@ -4,6 +4,7 @@ import mx.com.example.commons.to.OrderEventTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.aws.messaging.core.QueueMessagingTemplate;
 import org.springframework.cloud.aws.messaging.core.SqsMessageHeaders;
+import org.springframework.context.annotation.Bean;
 import org.springframework.messaging.support.MessageBuilder;
 
 import java.util.HashMap;

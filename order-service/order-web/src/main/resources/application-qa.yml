@@ -31,8 +31,8 @@ eureka:
 cloud:
   aws:
     credentials:
-      access-key: AKIAT2IZZR5GN3UVV3QV
-      secret-key: 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
+      access-key: ${ACCESS-KEY}
+      secret-key: ${SECRET-KEY}
       instance-profile: false
     region:
       static: us-east-1
