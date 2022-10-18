@@ -12,6 +12,8 @@ spring:
     name: order-service
   profiles:
     active: dev
+  main:
+    allow-bean-definition-overriding: true
 
 server:
   port: 8100
@@ -28,3 +30,17 @@ eureka:
   instance:
     leaseRenewalIntervalInSeconds: 5
     preferIpAddress: true
+
+cloud:
+  aws:
+    credentials:
+      access-key: AKIAT2IZZR5GN3UVV3QV
+      secret-key: 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
+      instance-profile: false
+    region:
+      static: us-east-1
+      auto: false
+    stack:
+      auto: false
+    endpoint:
+      url: https://sqs.us-east-1.amazonaws.com/262583979852/ticket_events.fifo

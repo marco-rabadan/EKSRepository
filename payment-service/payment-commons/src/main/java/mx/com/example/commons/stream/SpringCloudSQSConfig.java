@@ -30,13 +30,15 @@ public class SpringCloudSQSConfig {
 
 	public AmazonSQSAsync amazonSQSAsync() {
 
-		AmazonSQSAsyncClientBuilder amazonSQSAsyncClientBuilder = AmazonSQSAsyncClientBuilder.standard();
-		AmazonSQSAsync amazonSQSAsync = null;
-		amazonSQSAsyncClientBuilder.withRegion(Regions.US_EAST_1);
-		BasicAWSCredentials basicAWSCredentials = new BasicAWSCredentials(accessKey, secretKey);
-		amazonSQSAsyncClientBuilder.withCredentials(new AWSStaticCredentialsProvider(basicAWSCredentials));
-		amazonSQSAsync = amazonSQSAsyncClientBuilder.build();
-		return amazonSQSAsync;
+		return AmazonSQSAsyncClientBuilder
+				.standard()
+				.withRegion(Regions.US_EAST_1)
+				.withCredentials(
+						new AWSStaticCredentialsProvider(
+								new BasicAWSCredentials(accessKey, secretKey)
+						)
+				)
+				.build();
 
 	}
 }

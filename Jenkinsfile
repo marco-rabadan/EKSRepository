@@ -43,17 +43,17 @@ pipeline {
                 }
             }
         }
-        /*stage("Docker Build") {
+        stage("Docker Build") {
             steps {
                 dir("payment-service/"){
                     sh "docker build --cache-from payment-service:latest -t payment-service:latest ."
                 }
-                dir("order-service/"){
+                /*dir("order-service/"){
                     sh "docker build --cache-from order-service:latest -t order-service:latest ."
                 }
                 dir("kitchen-service/"){
                     sh "docker build --cache-from kitchen-service:latest -t kitchen-service:latest ."
-                }
+                }*/
             }
         }
         stage('Logging into AWS ECR') {
@@ -63,8 +63,8 @@ pipeline {
                             def login = ecrLogin()
                             sh "${login}"
                             sh '''docker tag payment-service:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/payment-service:v3'''
-                            sh '''docker tag order-service:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/order-service:v3'''
-                            sh '''docker tag kitchen-service:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service:v3'''
+                            /*sh '''docker tag order-service:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/order-service:v3'''
+                            sh '''docker tag kitchen-service:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service:v3'''*/
                         }
                 }
             }
@@ -72,8 +72,8 @@ pipeline {
         stage("Docker Push") {
             steps {
                 sh "docker push ${registry_payment}"
-                sh "docker push ${registry_order}"
-                sh "docker push ${registry_kitchen}"
+                /*sh "docker push ${registry_order}"
+                sh "docker push ${registry_kitchen}"*/
             }
         }
         stage('Kubectl') {
@@ -82,10 +82,10 @@ pipeline {
                     sh 'aws eks --region us-east-1 update-kubeconfig --name eks-cluster-test'
                     sh 'kubectl get pods'
                     dir("Deployment/"){
-                        sh 'kubectl apply -f Kitchen-deployment.yaml'
-                        sh 'kubectl apply -f Order-deployment.yaml'
                         sh 'kubectl apply -f Payment-deployment.yaml'
-                        sh 'kubectl apply -f secrets.yaml'
+                        /*sh 'kubectl apply -f Kitchen-deployment.yaml'
+                        sh 'kubectl apply -f Order-deployment.yaml'
+                        sh 'kubectl apply -f secrets.yaml'*/
                         sh 'kubectl apply -f ingress-deploy.yaml'
                         sh 'kubectl apply -f nginx_ingress_services.yaml'
                     }

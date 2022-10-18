@@ -9,8 +9,8 @@
         <module name="order-web" />
         <module name="order-commons" />
         <module name="kitchen-persistence" />
-        <module name="payment-persistence" />
         <module name="order-persistence" />
+        <module name="payment-persistence" />
         <module name="order-services" />
         <module name="payment-model" />
         <module name="payment-web" />
@@ -19,8 +19,8 @@
         <module name="kitchen-model" />
         <module name="kitchen-web" />
         <module name="kitchen-commons" />
-        <module name="payment-commons" />
         <module name="order-model" />
+        <module name="payment-commons" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

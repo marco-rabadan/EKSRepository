@@ -17,8 +17,6 @@ public class PaymentFacade implements IPaymentFacade {
     @Autowired
     private IPaymentService paymentService;
 
-    @Autowired
-    private KafkaTemplate kafkaTemplate;
     private SqsQueueSender sqsQueueSender;
 
     public List<UserTO> getAllUsers() {
@@ -31,7 +29,7 @@ public class PaymentFacade implements IPaymentFacade {
         PaymentEventTO paymentEvent = new PaymentEventTO();
 
         //kafkaTemplate.send("payment_events", paymentEvent);
-        sqsQueueSender.send("payment_events", paymentEvent.toString());
+        sqsQueueSender.putMessagedToQueue(paymentEvent);
         return paymentEvent;
     }
 }

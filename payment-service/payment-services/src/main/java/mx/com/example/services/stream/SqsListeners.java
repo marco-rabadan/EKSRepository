@@ -7,22 +7,18 @@ import mx.com.example.services.facade.IPaymentFacade;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.aws.messaging.core.NotificationMessagingTemplate;
-import org.springframework.cloud.aws.messaging.core.QueueMessagingTemplate;
 import org.springframework.cloud.aws.messaging.listener.annotation.SqsListener;
 import org.springframework.stereotype.Component;
-import org.springframework.messaging.handler.annotation.MessageExceptionHandler;
-import org.springframework.messaging.support.MessageBuilder;
 
 @Component
-public class KafkaListeners {
+public class SqsListeners {
 
-    static final Logger LOG = LogManager.getLogger(KafkaListeners.class);
+    static final Logger LOG = LogManager.getLogger(SqsListeners.class);
 
     @Autowired
     private IPaymentFacade paymentFacade;
 
-    @SqsListener("ticket_events")
+    @SqsListener("ticket_events.fifo")
     public void ticketEvents(String message) throws JsonProcessingException {
 
         TicketEventTO ticket = new ObjectMapper().readValue(message, TicketEventTO.class);

@@ -1,5 +1,6 @@
 package mx.com.example.services.facade.impl;
 
+import mx.com.example.commons.stream.SqsQueueSender;
 import mx.com.example.commons.to.OrderEventTO;
 import mx.com.example.commons.to.OrderTO;
 import mx.com.example.commons.to.PaymentEventTO;
@@ -21,6 +22,8 @@ public class OrderFacade implements IOrderFacade {
 
     @Autowired
     KafkaTemplate kafkaTemplate;
+
+    private SqsQueueSender sqsQueueSender;
 
     @Autowired
     private IOrderService orderService;
@@ -46,6 +49,7 @@ public class OrderFacade implements IOrderFacade {
 
         orderDAO.save(orderDO);
         // kafkaTemplate.send("order_events", event);
+        sqsQueueSender.putMessagedToQueue(event);
         return event;
     }
 
