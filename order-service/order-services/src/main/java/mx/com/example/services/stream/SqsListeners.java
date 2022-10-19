@@ -7,6 +7,7 @@ import mx.com.example.services.facade.impl.OrderFacade;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.aws.messaging.listener.annotation.SqsListener;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +18,10 @@ public class SqsListeners {
     @Autowired
     private OrderFacade orderFacade;
 
-    @SqsListener("payments_events.fifo")
+    @Value(value = "${cloud.aws.endpoint.order.name}")
+    private String sqs_queue_order;
+
+    @SqsListener(sqs_queue_order)
     public void listenGroupFoo(String message) throws JsonProcessingException {
 
         PaymentEventTO payment = new ObjectMapper().readValue(message, PaymentEventTO.class);

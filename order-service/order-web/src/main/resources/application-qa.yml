@@ -42,3 +42,4 @@ cloud:
     endpoint:
       order:
         url: ${ENDPOINT_ORDER_SQS}
+        name: ${ORDER_SQS}
