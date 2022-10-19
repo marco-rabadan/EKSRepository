@@ -13,3 +13,8 @@
   type = string
   default = "local"
  }
+
+ variable "set_password" {
+  type = string
+  default = "pass"
+ }
