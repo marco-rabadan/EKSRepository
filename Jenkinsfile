@@ -23,7 +23,7 @@ pipeline {
         registry_payment        = '262583979852.dkr.ecr.us-east-1.amazonaws.com/payment-service:v4'
         registry_order          = '262583979852.dkr.ecr.us-east-1.amazonaws.com/order-service:v4'
         registry_kitchen        = '262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service:v4'
-        TF_VAR_environments     = 'jimena'
+        TF_environments     = 'jimena'
         TF_VAR_environment      = 'prod'
     }
     stages {
@@ -33,7 +33,7 @@ pipeline {
             }
             steps {
                 dir("infra/"){
-                    sh "export TF_VAR_environments"
+                    sh "export TF_environments"
                     sh "terraform init"
                     sh "terraform apply --auto-approve -var set_password=${TF_VAR_environment}"
                 }
