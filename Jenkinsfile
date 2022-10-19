@@ -102,7 +102,7 @@ pipeline {
             }
             steps {
                 withAWS(credentials: 'ecr-credentials', region: 'us-east-1') {
-                    sh 'aws eks --region us-east-1 update-kubeconfig --name eks-cluster-test'
+                    sh 'aws eks --region us-east-1 update-kubeconfig --name eks-cluster-jimena'
                     sh 'kubectl get pods'
                     dir("Deployment/"){
                         sh 'kubectl apply -f Payment-deployment.yaml'
