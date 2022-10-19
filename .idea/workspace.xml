@@ -6,28 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="54b9ae4d-a41c-48be-aa27-5ee36ddf17a7" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Deployment/Kitchen-deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Deployment/Kitchen-deployment.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Deployment/Order-deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Deployment/Order-deployment.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Deployment/Payment-deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Deployment/Payment-deployment.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Deployment/secrets.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Deployment/secrets.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kitchen-service/kitchen-commons/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/kitchen-service/kitchen-commons/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kitchen-service/kitchen-services/src/main/java/mx/com/example/services/facade/impl/KitchenFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/kitchen-service/kitchen-services/src/main/java/mx/com/example/services/facade/impl/KitchenFacade.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kitchen-service/kitchen-web/src/main/resources/application-prod.yml" beforeDir="false" afterPath="$PROJECT_DIR$/kitchen-service/kitchen-web/src/main/resources/application-prod.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kitchen-service/kitchen-web/src/main/resources/application-qa.yml" beforeDir="false" afterPath="$PROJECT_DIR$/kitchen-service/kitchen-web/src/main/resources/application-qa.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kitchen-service/kitchen-web/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/kitchen-service/kitchen-web/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kitchen-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/kitchen-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/order-commons/src/main/java/mx/com/example/commons/stream/SpringCloudSQSConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/order-commons/src/main/java/mx/com/example/commons/stream/SpringCloudSQSConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/order-commons/src/main/java/mx/com/example/commons/stream/SqsQueueSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/order-commons/src/main/java/mx/com/example/commons/stream/SqsQueueSender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/order-services/src/main/java/mx/com/example/services/facade/impl/OrderFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/order-services/src/main/java/mx/com/example/services/facade/impl/OrderFacade.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/order-services/src/main/java/mx/com/example/services/stream/SqsListeners.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/order-services/src/main/java/mx/com/example/services/stream/SqsListeners.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/order-web/src/main/resources/application-prod.yml" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/order-web/src/main/resources/application-prod.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/order-web/src/main/resources/application-qa.yml" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/order-web/src/main/resources/application-qa.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/order-web/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/order-web/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment-service/payment-commons/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/payment-service/payment-commons/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment-service/payment-commons/src/main/java/mx/com/example/commons/stream/SpringCloudSQSConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/payment-service/payment-commons/src/main/java/mx/com/example/commons/stream/SpringCloudSQSConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment-service/payment-commons/src/main/java/mx/com/example/commons/stream/SqsQueueSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/payment-service/payment-commons/src/main/java/mx/com/example/commons/stream/SqsQueueSender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment-service/payment-services/src/main/java/mx/com/example/services/facade/impl/PaymentFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/payment-service/payment-services/src/main/java/mx/com/example/services/facade/impl/PaymentFacade.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment-service/payment-web/src/main/resources/application-prod.yml" beforeDir="false" afterPath="$PROJECT_DIR$/payment-service/payment-web/src/main/resources/application-prod.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment-service/payment-web/src/main/resources/application-qa.yml" beforeDir="false" afterPath="$PROJECT_DIR$/payment-service/payment-web/src/main/resources/application-qa.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment-service/payment-web/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/payment-service/payment-web/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/payment-service/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,7 +94,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1666053220859</updated>
-      <workItem from="1666053223165" duration="42451000" />
+      <workItem from="1666053223165" duration="44423000" />
     </task>
     <servers />
   </component>

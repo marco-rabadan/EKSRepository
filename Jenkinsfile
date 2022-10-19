@@ -8,6 +8,7 @@ pipeline {
         booleanParam(name: 'destroy', defaultValue: false, description: 'Destroy Terraform build?')
         booleanParam(name: 'deploy', defaultValue: false, description: 'Deploy Terraform apply?')
         booleanParam(name: 'database', defaultValue: false, description: 'Create tables?')
+        booleanParam(name: 'microservices', defaultValue: false, description: 'Create microservices?')
     }
     environment {
         AWS_ACCESS_KEY_ID       = credentials('AWS_ACCESS_KEY_ID')
@@ -22,6 +23,7 @@ pipeline {
         registry_payment        = '262583979852.dkr.ecr.us-east-1.amazonaws.com/payment-service:v4'
         registry_order          = '262583979852.dkr.ecr.us-east-1.amazonaws.com/order-service:v4'
         registry_kitchen        = '262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service:v4'
+        TF_VAR_environments     = 'jimena'
     }
     stages {
         stage('Create Infra') {
@@ -30,6 +32,7 @@ pipeline {
             }
             steps {
                 dir("infra/"){
+                    sh "export TF_VAR_environments"
                     sh "terraform init"
                     sh "terraform apply --auto-approve"
                 }
@@ -56,6 +59,9 @@ pipeline {
             }
         }
         stage("Docker Build") {
+            when {
+                equals expected: true, actual: params.microservices
+            }
             steps {
                 dir("payment-service/"){
                     sh "docker build --cache-from payment-service:latest -t payment-service:latest ."
@@ -71,6 +77,9 @@ pipeline {
             }
         }
         stage('Logging into AWS ECR') {
+            when {
+                equals expected: true, actual: params.microservices
+            }
             steps {
                 withAWS(credentials: 'ecr-credentials', region: 'us-east-1') {
                         script {
@@ -84,6 +93,9 @@ pipeline {
             }
         }
         stage("Docker Push") {
+            when {
+                equals expected: true, actual: params.microservices
+            }
             steps {
                 sh "docker push ${registry_payment}"
                 sh "docker push ${registry_order}"
@@ -91,6 +103,9 @@ pipeline {
             }
         }
         stage('Kubectl') {
+            when {
+                equals expected: true, actual: params.microservices
+            }
             steps {
                 withAWS(credentials: 'ecr-credentials', region: 'us-east-1') {
                     sh 'aws eks --region us-east-1 update-kubeconfig --name eks-cluster-test'
