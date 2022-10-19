@@ -7,7 +7,6 @@ resource "aws_db_instance" "terraform_rds" {
   username             = "postgresql1"
   password             = "foopwdpost!"
   publicly_accessible   = true
-  db_subnet_group_name = var.subnet_id_1
   tags = {
     Name = "db_postgres_${var.environment}"
   }
