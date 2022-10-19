@@ -16,9 +16,9 @@ pipeline {
         AWS_ACCOUNT_ID          = "262583979852"
         AWS_DEFAULT_REGION      = "us-east-1" 
         TF_VAR_environment      = 'jimena'
-        registry_payment        = '262583979852.dkr.ecr.us-east-1.amazonaws.com/payment-service:v4'
-        registry_order          = '262583979852.dkr.ecr.us-east-1.amazonaws.com/order-service:v4'
-        registry_kitchen        = '262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service:v4'
+        registry_payment        = '262583979852.dkr.ecr.us-east-1.amazonaws.com/payment-service:v5'
+        registry_order          = '262583979852.dkr.ecr.us-east-1.amazonaws.com/order-service:v5'
+        registry_kitchen        = '262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service:v5'
     }
     stages {
         stage('Create Infra') {
@@ -79,9 +79,9 @@ pipeline {
                         script {
                             def login = ecrLogin()
                             sh "${login}"
-                            sh '''docker tag payment-service:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/payment-service:v4'''
-                            sh '''docker tag order-service:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/order-service:v4'''
-                            sh '''docker tag kitchen-service:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service:v4'''
+                            sh '''docker tag payment-service:latest ${registry_payment}'''
+                            sh '''docker tag kitchen-service:latest ${registry_kitchen}"'''
+                            sh '''docker tag order-service:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/order-service'''
                         }
                 }
             }
@@ -92,8 +92,8 @@ pipeline {
             }
             steps {
                 sh "docker push ${registry_payment}"
-                sh "docker push ${registry_order}"
                 sh "docker push ${registry_kitchen}"
+                sh "docker push 262583979852.dkr.ecr.us-east-1.amazonaws.com/order-service"
             }
         }
         stage('Kubectl') {
