@@ -1,10 +1,10 @@
 resource "aws_sqs_queue" "ticket_events" {
-  name                        = "ticket_events.fifo"
+  name                        = "ticket_events"+var.environment+".fifo"
   fifo_queue                  = true
   content_based_deduplication = true
 }
 resource "aws_sqs_queue" "order_events" {
-  name                        = "order_events.fifo"
+  name                        = "order_events"+var.environments+".fifo"
   fifo_queue                  = true
   content_based_deduplication = true
 }

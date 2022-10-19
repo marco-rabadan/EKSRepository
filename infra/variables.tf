@@ -7,3 +7,9 @@
   type = string
   default = "subnet-06a863af6e2907a70"
  }
+
+
+ variable "environment" {
+  type = string
+  default = "local"
+ }
