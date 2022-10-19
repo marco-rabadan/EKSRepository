@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://postgres:5432/dbname
-    username: postgres
-    password: project123
+    url: ${RDS_ENDPOINT}
+    username: ${RDS_USER}
+    password: ${RDS_PASS}
     driver-class-name: org.postgresql.Driver
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQL9Dialect
@@ -28,8 +28,8 @@ eureka:
 cloud:
   aws:
     credentials:
-      access-key: ${ACCESS-KEY}
-      secret-key: ${SECRET-KEY}
+      access-key: ${ACCESS_KEY}
+      secret-key: ${SECRET_KEY}
       instance-profile: false
     region:
       static: us-east-1
@@ -37,4 +37,5 @@ cloud:
     stack:
       auto: false
     endpoint:
-      url: https://sqs.us-east-1.amazonaws.com/262583979852/ticket_events.fifo
+      order:
+        url: ${ENDPOINT_ORDER_SQS}

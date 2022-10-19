@@ -1,5 +1,6 @@
 package mx.com.example.services.facade.impl;
 
+import mx.com.example.commons.stream.SqsQueueSender;
 import mx.com.example.commons.to.OrderEventTO;
 import mx.com.example.commons.to.PaymentEventTO;
 import mx.com.example.commons.to.TicketEventTO;
@@ -27,6 +28,9 @@ public class KitchenFacade implements IKitchenFacade {
     @Autowired
     private KafkaTemplate kafkaTemplate;
 
+    @Autowired
+    SqsQueueSender sqsQueueSender;
+
     public List<UserTO> getAllUsers() {
         return this.kitchenService.getUsers();
     }
@@ -37,17 +41,26 @@ public class KitchenFacade implements IKitchenFacade {
         Date date = new Date();
 
         KitchenDO kitchenDO = new KitchenDO();
-        
+        kitchenDO.setDatetime(date);
+        kitchenDO.setUuid(order.getUuid());
+        kitchenDO.setDescription(order.getDescription());
+        kitchenDO.setStatus("CREATE_PENDING");
+        kitchenDAO.save(kitchenDO);
 
         TicketEventTO ticketEvent = new TicketEventTO();
-        
+        ticketEvent.setDescription(order.getDescription());
+        ticketEvent.setQuantity(order.getQuantity());
+        ticketEvent.setDateTime(date);
+        ticketEvent.setUuid(order.getUuid());
+        ticketEvent.setPrice(500);
+        ticketEvent.setStatus(1);
 
-        //kafkaTemplate.send("ticket_events", ticketEvent);
+        sqsQueueSender.putMessagedToQueue(ticketEvent);
         return ticketEvent;
     }
 
     @Override
     public void approveTicket(PaymentEventTO payment) {
-        
+        kitchenDAO.setStatusForKitchenDO("CREATED", payment.getUuid());
     }
 }

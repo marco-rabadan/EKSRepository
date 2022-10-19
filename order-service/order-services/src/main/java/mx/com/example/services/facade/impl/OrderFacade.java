@@ -23,7 +23,8 @@ public class OrderFacade implements IOrderFacade {
     @Autowired
     KafkaTemplate kafkaTemplate;
 
-    private SqsQueueSender sqsQueueSender;
+    @Autowired
+    SqsQueueSender sqsQueueSender;
 
     @Autowired
     private IOrderService orderService;
@@ -42,19 +43,27 @@ public class OrderFacade implements IOrderFacade {
         Date date = new Date();
 
         OrderEventTO event = new OrderEventTO();
-        
+        event.setUuid(uuid);
+        event.setDateTime(new Date());
+        event.setDescription(order.getDescription());
+        event.setQuantity(order.getQuantity());
 
         OrderDO orderDO = new OrderDO();
-        
+        orderDO.setUuid(uuid);
+        orderDO.setDatetime(date);
+        orderDO.setStatus("APPROVAL_PENDING");
+        orderDO.setDescription(order.getDescription());
 
         orderDAO.save(orderDO);
         // kafkaTemplate.send("order_events", event);
+        //String endPoint="https://sqs.us-east-1.amazonaws.com/262583979852/order_events.fifo";
+        //sqsQueueSender = new SqsQueueSender();
         sqsQueueSender.putMessagedToQueue(event);
         return event;
     }
 
     @Override
     public void approveOrder(PaymentEventTO payment) {
-        
+        orderDAO.setStatusForOrderDO("APPROVED", payment.getUuid());
     }
 }

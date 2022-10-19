@@ -12,6 +12,8 @@ spring:
     name: payment-service
   profiles:
     active: dev
+  main:
+    allow-bean-definition-overriding: true
 
 server:
   port: 8300
@@ -30,12 +32,16 @@ eureka:
     preferIpAddress: true
 
 cloud:
- aws:
-   credentials:
-     access-key: ${ACCESS-KEY}
-      secret-key: ${SECRET-KEY}
-   region:
-     static: us-east-1
-     auto: false
-   endpoint:
-     url: https://sqs-us-east-1.amazonaws.com/
+  aws:
+    credentials:
+      access-key: ${ACCESS_KEY}
+      secret-key: ${SECRET_KEY}
+      instance-profile: false
+    region:
+      static: us-east-1
+      auto: false
+    stack:
+      auto: false
+    endpoint:
+      payment:
+        url: ${ENDPOINT_PAYMENT_SQS}

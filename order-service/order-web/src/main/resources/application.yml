@@ -1,10 +1,9 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:db;DB_CLOSE_DELAY=-1
-    username: sa
-    password:
-    driver-class-name: org.h2.Driver
-    initialization-mode: always
+    url: ${RDS_ENDPOINT}
+    username: ${RDS_USER}
+    password: ${RDS_PASS}
+    driver-class-name: org.postgresql.Driver
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQL9Dialect
     show-sql: true
@@ -34,8 +33,8 @@ eureka:
 cloud:
   aws:
     credentials:
-      access-key: ${ACCESS-KEY}
-      secret-key: ${SECRET-KEY}
+      access-key: ${ACCESS_KEY}
+      secret-key: ${SECRET_KEY}
       instance-profile: false
     region:
       static: us-east-1
@@ -43,4 +42,5 @@ cloud:
     stack:
       auto: false
     endpoint:
-      url: https://sqs.us-east-1.amazonaws.com/262583979852/ticket_events.fifo
+      order:
+        url: ${ENDPOINT_ORDER_SQS}

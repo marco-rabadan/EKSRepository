@@ -17,6 +17,7 @@ public class PaymentFacade implements IPaymentFacade {
     @Autowired
     private IPaymentService paymentService;
 
+    @Autowired
     private SqsQueueSender sqsQueueSender;
 
     public List<UserTO> getAllUsers() {
@@ -27,8 +28,14 @@ public class PaymentFacade implements IPaymentFacade {
     public PaymentEventTO authorizeCard(TicketEventTO ticketEvent) {
 
         PaymentEventTO paymentEvent = new PaymentEventTO();
+        paymentEvent.setDescription(ticketEvent.getDescription());
+        paymentEvent.setDateTime(ticketEvent.getDateTime());
+        paymentEvent.setUuid(ticketEvent.getUuid());
+        paymentEvent.setComfirmCode("RF90");
+        paymentEvent.setStatus(1);
 
         //kafkaTemplate.send("payment_events", paymentEvent);
+        String endPoint="https://sqs.us-east-1.amazonaws.com/262583979852/payment_events.fifo";
         sqsQueueSender.putMessagedToQueue(paymentEvent);
         return paymentEvent;
     }

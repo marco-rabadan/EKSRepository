@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://terraform-20221015151538601700000001.cti3rewkpnjv.us-east-1.rds.amazonaws.com/dbpostgresql
-    username: postgresql1
-    password: foopwdpost!
+    url: ${RDS_ENDPOINT}
+    username: ${RDS_USER}
+    password: ${RDS_PASS}
     driver-class-name: org.postgresql.Driver
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQL9Dialect
@@ -10,6 +10,8 @@ spring:
   application:
     name: kitchen-service
   profiles: qa
+  main:
+    allow-bean-definition-overriding: true
 
 server:
   port: 8200
@@ -26,3 +28,17 @@ eureka:
   instance:
     leaseRenewalIntervalInSeconds: 5   
     preferIpAddress: true
+cloud:
+  aws:
+    credentials:
+      access-key: ${ACCESS_KEY}
+      secret-key: ${SECRET_KEY}
+      instance-profile: false
+    region:
+      static: us-east-1
+      auto: false
+    stack:
+      auto: false
+    endpoint:
+      tickets:
+        url: ${ENDPOINT_TICKETS_SQS}

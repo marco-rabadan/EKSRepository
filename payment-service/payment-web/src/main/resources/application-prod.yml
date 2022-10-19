@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://postgres:5432/dbname
-    username: postgres
-    password: project123
+    url: ${RDS_ENDPOINT}
+    username: ${RDS_USER}
+    password: ${RDS_PASS}
     driver-class-name: org.postgresql.Driver
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQL9Dialect
@@ -10,6 +10,8 @@ spring:
   application:
     name: payment-service
   profiles: prod
+  main:
+    allow-bean-definition-overriding: true
 
 server:
   port: 8300
@@ -23,3 +25,17 @@ eureka:
   instance:
     leaseRenewalIntervalInSeconds: 5   
     preferIpAddress: true
+cloud:
+  aws:
+    credentials:
+      access-key: ${ACCESS_KEY}
+      secret-key: ${SECRET_KEY}
+      instance-profile: false
+    region:
+      static: us-east-1
+      auto: false
+    stack:
+      auto: false
+    endpoint:
+      payment:
+        url: ${ENDPOINT_PAYMENT_SQS}
