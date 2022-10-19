@@ -4,7 +4,7 @@ resource "aws_sqs_queue" "ticket_events" {
   content_based_deduplication = true
 }
 resource "aws_sqs_queue" "order_events" {
-  name                        = "order_events_${var.environments}.fifo"
+  name                        = "order_events_${var.environment}.fifo"
   fifo_queue                  = true
   content_based_deduplication = true
 }
