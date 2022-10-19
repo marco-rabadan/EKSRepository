@@ -1,7 +1,7 @@
 
 //ROL EKS CLUSTER
 resource "aws_iam_role" "eks-cluster-role" {
-  name = "eks-iam-role"
+  name = "eks-iam-role-${var.environment}"
   path = "/"
   assume_role_policy = <<POLICY
   {
@@ -26,7 +26,7 @@ resource "aws_iam_role_policy_attachment" "AmazonEKSClusterPolicy" {
 }
 
 resource "aws_iam_role" "eks-nodes-role" {
-  name = "eks-nodes-role"
+  name = "eks-nodes-role-${var.environment}"
   path = "/"
   assume_role_policy = <<POLICY
   {
@@ -66,8 +66,8 @@ resource "aws_iam_role_policy_attachment" "AmazonEC2ContainerRegistryReadOnly-EK
   role    = aws_iam_role.eks-nodes-role.name
  }
 
-resource "aws_eks_cluster" "eks-cluster-test" {
- name = "eks-cluster-test"
+resource "aws_eks_cluster" "eks-cluster-services" {
+ name = "eks-cluster-${var.environment}"
  role_arn = aws_iam_role.eks-cluster-role.arn
 
  vpc_config {
@@ -80,8 +80,8 @@ resource "aws_eks_cluster" "eks-cluster-test" {
 }
 
  resource "aws_eks_node_group" "worker-node-group" {
-  cluster_name  = aws_eks_cluster.eks-cluster-test.name
-  node_group_name = "eks-cluster-test-workernodes"
+  cluster_name  = aws_eks_cluster.eks-cluster-services.name
+  node_group_name = "eks-cluster-workernodes-${var.environment}"
   node_role_arn  = aws_iam_role.eks-nodes-role.arn
   subnet_ids   = [var.subnet_id_1, var.subnet_id_2]
   instance_types = ["t2.small"]

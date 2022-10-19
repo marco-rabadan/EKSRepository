@@ -13,17 +13,12 @@ pipeline {
     environment {
         AWS_ACCESS_KEY_ID       = credentials('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY   = credentials('AWS_SECRET_ACCESS_KEY')
-        NAME                    = 'dev'
-        TF_IN_AUTOMATION        = '1'
         AWS_ACCOUNT_ID          = "262583979852"
         AWS_DEFAULT_REGION      = "us-east-1" 
-        IMAGE_REPO_NAME         = "ECR_REPO_NAME"
-        IMAGE_TAG               = "IMAGE_TAG"
-        REPOSITORY_URI          = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
+        TF_VAR_environment      = 'jimena'
         registry_payment        = '262583979852.dkr.ecr.us-east-1.amazonaws.com/payment-service:v4'
         registry_order          = '262583979852.dkr.ecr.us-east-1.amazonaws.com/order-service:v4'
         registry_kitchen        = '262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service:v4'
-        TF_VAR_environment      = 'jimena'
     }
     stages {
         stage('Create Infra') {
