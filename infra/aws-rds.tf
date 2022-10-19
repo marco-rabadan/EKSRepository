@@ -1,11 +1,16 @@
 resource "aws_db_instance" "terraform_rds" {
   allocated_storage    = 10
-  db_name              = "dbpostgresql"
+  db_name              = "db_postgres_${var.environment}"
   engine               = "postgres"
   engine_version       = "14.1"
   instance_class       = "db.t3.micro"
   username             = "postgresql1"
   password             = "foopwdpost!"
+  publicly_accessible   = true
+  db_subnet_group_name = var.subnet_id_1
+  tags = {
+    Name = "db_postgres_${var.environment}"
+  }
 }
 
 output "rdsdbname" {

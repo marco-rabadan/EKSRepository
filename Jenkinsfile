@@ -23,7 +23,7 @@ pipeline {
         registry_payment        = '262583979852.dkr.ecr.us-east-1.amazonaws.com/payment-service:v4'
         registry_order          = '262583979852.dkr.ecr.us-east-1.amazonaws.com/order-service:v4'
         registry_kitchen        = '262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service:v4'
-        TF_VAR_environment      = 'env'
+        TF_VAR_environment      = 'jimena'
     }
     stages {
         stage('Create Infra') {
