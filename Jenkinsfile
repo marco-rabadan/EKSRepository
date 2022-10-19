@@ -19,9 +19,9 @@ pipeline {
         IMAGE_REPO_NAME         = "ECR_REPO_NAME"
         IMAGE_TAG               = "IMAGE_TAG"
         REPOSITORY_URI          = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
-        registry_payment        = '262583979852.dkr.ecr.us-east-1.amazonaws.com/payment-service-${NAME}:v3'
-        registry_order          = '262583979852.dkr.ecr.us-east-1.amazonaws.com/order-service:v3'
-        registry_kitchen        = '262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service:v3'
+        registry_payment        = '262583979852.dkr.ecr.us-east-1.amazonaws.com/payment-service-${NAME}:v4'
+        registry_order          = '262583979852.dkr.ecr.us-east-1.amazonaws.com/order-service:v4'
+        registry_kitchen        = '262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service:v4'
     }
     stages {
         stage('Create Infra') {
@@ -55,11 +55,11 @@ pipeline {
                 }
             }
         }
-        /*stage("Docker Build") {
+        stage("Docker Build") {
             steps {
                 dir("payment-service/"){
-                    //sh "docker build --cache-from payment-service:latest -t payment-service:latest ."
-                    sh "docker pull payment-service:latests"
+                    sh "docker build --cache-from payment-service:latest -t payment-service:latest ."
+                    //sh "docker pull payment-service:latest"
                     //docker hub publico
                 }
                 dir("order-service/"){
@@ -76,9 +76,9 @@ pipeline {
                         script {
                             def login = ecrLogin()
                             sh "${login}"
-                            sh '''docker tag payment-service:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/payment-service:v3'''
-                            sh '''docker tag order-service:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/order-service:v3'''
-                            sh '''docker tag kitchen-service:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service:v3'''
+                            sh '''docker tag payment-service:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/payment-service:v4'''
+                            sh '''docker tag order-service:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/order-service:v4'''
+                            sh '''docker tag kitchen-service:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service:v4'''
                         }
                 }
             }
@@ -99,12 +99,12 @@ pipeline {
                         sh 'kubectl apply -f Payment-deployment.yaml'
                         sh 'kubectl apply -f Kitchen-deployment.yaml'
                         sh 'kubectl apply -f Order-deployment.yaml'
-                        sh 'kubectl apply -f secrets.yaml'
+                        //sh 'kubectl apply -f secrets.yaml'
                         sh 'kubectl apply -f ingress-deploy.yaml'
                         sh 'kubectl apply -f nginx_ingress_services.yaml'
                     }
                 }
             }
-        }*/
+        }
     }
 }
