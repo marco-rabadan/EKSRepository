@@ -2,6 +2,8 @@ package mx.com.example.commons.stream;
 
 import com.amazonaws.services.sqs.AmazonSQSAsync;
 import mx.com.example.commons.to.OrderEventTO;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.aws.messaging.core.QueueMessagingTemplate;
@@ -15,7 +17,7 @@ import java.util.Map;
 
 @Component
 public class SqsQueueSender {
-
+    static final Logger LOG = LogManager.getLogger(SqsQueueSender.class);
     @Autowired
     private QueueMessagingTemplate queueMessagingTemplate;
 
@@ -29,8 +31,11 @@ public class SqsQueueSender {
         headers.put(SqsMessageHeaders.SQS_GROUP_ID_HEADER, "1");
         // Below is optional, since Content based de-duplication is enabled
         //headers.put(SqsMessageHeaders.SQS_DEDUPLICATION_ID_HEADER, "2");
+        LOG.info("PUTMESSAGE " + order);
+        LOG.info("PUTMESSAGEJSON " + order.toString());
+
         queueMessagingTemplate.send(endPoint,
-                MessageBuilder.withPayload(order).copyHeaders(headers).build());
+                MessageBuilder.withPayload(order.toString()).copyHeaders(headers).build());
     }
 
 }
