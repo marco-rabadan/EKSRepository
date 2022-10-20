@@ -34,10 +34,10 @@ public class SqsQueueSender {
         // Below is optional, since Content based de-duplication is enabled
         //headers.put(SqsMessageHeaders.SQS_DEDUPLICATION_ID_HEADER, "2");
         LOG.info("PUTMESSAGEJSON " + order);
-        LOG.info("JSONTYPEMIME " + order.toString());
+        LOG.info("JSONTYPEMIMENEWJSON " + order.toString());
 
         queueMessagingTemplate.send(endPoint,
-                MessageBuilder.withPayload(order).copyHeaders(headers).build());
+                MessageBuilder.withPayload(order.toString()).copyHeaders(headers).build());
     }
 
 }
