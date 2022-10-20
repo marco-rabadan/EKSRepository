@@ -24,9 +24,11 @@ pipeline {
         stage('secrets') {
             steps {
                 dir("Deployment/"){
-                    sh "sed -i \"s#ACCESS_REPLACE#$AWS_ACCESS_KEY_ID#g\" secrets.yaml"
+                    sh 'kubectl apply -f nginx_ingress_services.yaml'
+                    /*sh "sed -i \"s#ACCESS_REPLACE#$AWS_ACCESS_KEY_ID#g\" secrets.yaml"
                     sh "sed -i \"s#SECRET_REPLACE#$AWS_SECRET_ACCESS_KEY#g\" secrets.yaml"
-                    //sh 'kubectl apply -f secrets.yaml'
+                    sh 'kubectl apply -f secrets.yaml'
+                    sh 'kubectl apply -f ingress-deploy.yaml'*/
                 }
             }
         }
@@ -118,8 +120,6 @@ pipeline {
                         sh 'kubectl apply -f Payment-deployment.yaml'
                         sh 'kubectl apply -f Kitchen-deployment.yaml'
                         sh 'kubectl apply -f Order-deployment.yaml'
-                        //sh 'kubectl apply -f secrets.yaml'
-                        sh 'kubectl apply -f ingress-deploy.yaml'
                         sh 'kubectl apply -f nginx_ingress_services.yaml'
                     }
                 }
