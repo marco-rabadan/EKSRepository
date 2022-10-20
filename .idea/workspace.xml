@@ -7,6 +7,7 @@
     <list default="true" id="54b9ae4d-a41c-48be-aa27-5ee36ddf17a7" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/order-service/order-commons/src/main/java/mx/com/example/commons/stream/SqsQueueSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/order-commons/src/main/java/mx/com/example/commons/stream/SqsQueueSender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order-service/order-commons/src/main/java/mx/com/example/commons/to/OrderEventTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/order-commons/src/main/java/mx/com/example/commons/to/OrderEventTO.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,7 +92,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1666053220859</updated>
-      <workItem from="1666053223165" duration="59019000" />
+      <workItem from="1666053223165" duration="59658000" />
     </task>
     <servers />
   </component>

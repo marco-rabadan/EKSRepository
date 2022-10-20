@@ -25,4 +25,12 @@ public class OrderEventTO extends EventBase {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+    @Override
+    public String toString() {
+        return "OrderEventTO{" +
+                "description='" + description + '\'' +
+                ", quantity=" + quantity +
+                '}';
+    }
 }
