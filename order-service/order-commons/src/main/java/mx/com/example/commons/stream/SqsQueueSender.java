@@ -11,6 +11,7 @@ import org.springframework.cloud.aws.messaging.core.SqsMessageHeaders;
 import org.springframework.context.annotation.Bean;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Component;
+import org.springframework.util.MimeType;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,10 +30,11 @@ public class SqsQueueSender {
         Map<String, Object> headers = new HashMap<>();
         // Message Group ID being set
         headers.put(SqsMessageHeaders.SQS_GROUP_ID_HEADER, "1");
+        headers.put("contentType",  MimeType.valueOf("application/json"));
         // Below is optional, since Content based de-duplication is enabled
         //headers.put(SqsMessageHeaders.SQS_DEDUPLICATION_ID_HEADER, "2");
-        LOG.info("PUTMESSAGE " + order);
         LOG.info("PUTMESSAGEJSON " + order.toString());
+        LOG.info("JSONTYPEMIMETOSTRING " + order.toString());
 
         queueMessagingTemplate.send(endPoint,
                 MessageBuilder.withPayload(order.toString()).copyHeaders(headers).build());
