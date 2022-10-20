@@ -37,5 +37,8 @@ cloud:
     stack:
       auto: false
     endpoint:
+      tickets:
+        url: ${ENDPOINT_TICKETS_SQS}
+        name: ${TICKETS_SQS}
       payment:
         url: ${ENDPOINT_PAYMENT_SQS}

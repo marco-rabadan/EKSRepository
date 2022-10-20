@@ -35,7 +35,6 @@ public class PaymentFacade implements IPaymentFacade {
         paymentEvent.setStatus(1);
 
         //kafkaTemplate.send("payment_events", paymentEvent);
-        String endPoint="https://sqs.us-east-1.amazonaws.com/262583979852/payment_events.fifo";
         sqsQueueSender.putMessagedToQueue(paymentEvent);
         return paymentEvent;
     }

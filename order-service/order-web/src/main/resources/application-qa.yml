@@ -43,3 +43,5 @@ cloud:
       order:
         url: ${ENDPOINT_ORDER_SQS}
         name: ${ORDER_SQS}
+      payment:
+        name: ${PAYMENT_SQS}

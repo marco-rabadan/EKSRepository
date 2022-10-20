@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://terraform-20221019215239791800000001.cti3rewkpnjv.us-east-1.rds.amazonaws.com/postgres
-    username: postgresql1
-    password: foopwdpost!
+    url: ${RDS_ENDPOINT}
+    username: ${RDS_USER}
+    password: ${RDS_PASS}
     driver-class-name: org.postgresql.Driver
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQL9Dialect
@@ -31,8 +31,8 @@ eureka:
 cloud:
   aws:
     credentials:
-      access-key:
-      secret-key:
+      access-key: ${ACCESS_KEY}
+      secret-key: ${SECRET_KEY}
       instance-profile: false
     region:
       static: us-east-1
@@ -41,4 +41,11 @@ cloud:
       auto: false
     endpoint:
       tickets:
-        url: https://sqs.us-east-1.amazonaws.com/262583979852/ticket_events_jimena.fifo
+        url: ${ENDPOINT_TICKETS_SQS}
+        name: ${TICKETS_SQS}
+      payment:
+        url: ${ENDPOINT_PAYMENT_SQS}
+        name: ${PAYMENT_SQS}
+      order:
+        url: ${ENDPOINT_ORDER_SQS}
+        name: ${ORDER_SQS}

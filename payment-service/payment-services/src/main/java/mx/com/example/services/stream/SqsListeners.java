@@ -18,7 +18,7 @@ public class SqsListeners {
     @Autowired
     private IPaymentFacade paymentFacade;
 
-    @SqsListener("ticket_events_jimena.fifo")
+    @SqsListener(value = "${cloud.aws.endpoint.tickets.name}")
     public void ticketEvents(String message) throws JsonProcessingException {
 
         TicketEventTO ticket = new ObjectMapper().readValue(message, TicketEventTO.class);

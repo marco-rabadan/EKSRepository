@@ -9,6 +9,7 @@ import mx.com.example.services.facade.impl.KitchenFacade;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.aws.messaging.listener.annotation.SqsListener;
 import org.springframework.stereotype.Component;
 
@@ -20,7 +21,7 @@ public class SqsListeners {
     private IKitchenFacade kitchenFacade;
 
     // @KafkaListener(topics = "order_events", groupId = "kitchen")
-    @SqsListener("order_events_jimena.fifo")
+    @SqsListener(value = "${cloud.aws.endpoint.order.name}")
     public void orderEvents(String message) throws JsonProcessingException {
 
         OrderEventTO order = new ObjectMapper().readValue(message, OrderEventTO.class);
@@ -35,7 +36,7 @@ public class SqsListeners {
     }
 
     //@KafkaListener(topics = "payment_events", groupId = "kitchen")
-    @SqsListener("payment_events.fifo")
+    @SqsListener(value = "${cloud.aws.endpoint.payment.name}")
     public void paymentEvents(String message) throws JsonProcessingException {
 
         PaymentEventTO payment = new ObjectMapper().readValue(message, PaymentEventTO.class);
