@@ -39,6 +39,7 @@ pipeline {
             steps {
                 withAWS(credentials: 'ecr-credentials', region: 'us-east-1') {
                     dir("Deployment/"){
+                        sh 'aws eks --region us-east-1 update-kubeconfig --name eks-cluster-jimena'
                         sh 'kubectl apply -f nginx_ingress_services.yaml'
                         sh "sed -i \"s#ACCESS_REPLACE#$AWS_ACCESS_KEY_ID#g\" secrets.yaml"
                         sh "sed -i \"s#SECRET_REPLACE#$AWS_SECRET_ACCESS_KEY#g\" secrets.yaml"
