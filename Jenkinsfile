@@ -91,9 +91,9 @@ pipeline {
                         script {
                             def login = ecrLogin()
                             sh "${login}"
-                            sh '''docker tag payment-service:latest ${registry_payment}'''
+                            sh '''docker tag payment-service:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/payment-service-jimena'''
                             sh '''docker tag kitchen-service-jimena:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service-jimena'''
-                            sh '''docker tag order-service:latest ${registry_order}'''
+                            sh '''docker tag order-service:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service-jimena'''
                         }
                 }
             }
@@ -103,9 +103,9 @@ pipeline {
                 equals expected: true, actual: params.microservices
             }
             steps {
-                sh "docker push ${registry_payment}"
+                sh "docker push 262583979852.dkr.ecr.us-east-1.amazonaws.com/payment-service-jimena:latest"
                 sh "docker push 262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service-jimena:latest"
-                sh "docker push ${registry_order}"
+                sh "docker push order-service:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service-jimena:latest"
             }
         }
         stage('Kubectl') {
