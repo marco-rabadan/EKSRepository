@@ -105,7 +105,7 @@ pipeline {
             steps {
                 sh "docker push 262583979852.dkr.ecr.us-east-1.amazonaws.com/payment-service-jimena:latest"
                 sh "docker push 262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service-jimena:latest"
-                sh "docker push order-service:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service-jimena:latest"
+                sh "docker push 262583979852.dkr.ecr.us-east-1.amazonaws.com/order-service-jimena:latest"
             }
         }
         stage('Kubectl') {
