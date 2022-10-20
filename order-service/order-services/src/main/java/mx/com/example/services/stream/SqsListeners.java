@@ -21,7 +21,7 @@ public class SqsListeners {
     @Value(value = "${cloud.aws.endpoint.order.name}")
     private String sqs_queue;
 
-    @SqsListener("payments_events.fifo")
+    @SqsListener("payments_events_jimena.fifo")
     public void listenGroupFoo(String message) throws JsonProcessingException {
 
         PaymentEventTO payment = new ObjectMapper().readValue(message, PaymentEventTO.class);

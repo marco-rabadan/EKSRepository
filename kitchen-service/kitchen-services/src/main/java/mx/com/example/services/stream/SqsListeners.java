@@ -20,7 +20,7 @@ public class SqsListeners {
     private IKitchenFacade kitchenFacade;
 
     // @KafkaListener(topics = "order_events", groupId = "kitchen")
-    @SqsListener("order_events.fifo")
+    @SqsListener("order_events_jimena.fifo")
     public void orderEvents(String message) throws JsonProcessingException {
 
         OrderEventTO order = new ObjectMapper().readValue(message, OrderEventTO.class);

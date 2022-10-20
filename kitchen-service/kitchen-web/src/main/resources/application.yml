@@ -1,17 +1,15 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:db;DB_CLOSE_DELAY=-1
-    username: sa
-    password:
-    driver-class-name: org.h2.Driver
-    initialization-mode: always
+    url: jdbc:postgresql://terraform-20221019215239791800000001.cti3rewkpnjv.us-east-1.rds.amazonaws.com/postgres
+    username: postgresql1
+    password: foopwdpost!
+    driver-class-name: org.postgresql.Driver
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQL9Dialect
     show-sql: true
   application:
     name: kitchen-service
-  profiles:
-    active: dev
+  profiles: dev
   main:
     allow-bean-definition-overriding: true
 
@@ -30,12 +28,11 @@ eureka:
   instance:
     leaseRenewalIntervalInSeconds: 5
     preferIpAddress: true
-
 cloud:
   aws:
     credentials:
-      access-key: ${ACCESS_KEY}
-      secret-key: ${SECRET_KEY}
+      access-key:
+      secret-key:
       instance-profile: false
     region:
       static: us-east-1
@@ -44,4 +41,4 @@ cloud:
       auto: false
     endpoint:
       tickets:
-        url: ${ENDPOINT_TICKETS_SQS}
+        url: https://sqs.us-east-1.amazonaws.com/262583979852/ticket_events_jimena.fifo

@@ -16,11 +16,21 @@ pipeline {
         AWS_ACCOUNT_ID          = "262583979852"
         AWS_DEFAULT_REGION      = "us-east-1" 
         TF_VAR_environment      = 'jimena'
-        registry_payment        = '262583979852.dkr.ecr.us-east-1.amazonaws.com/payment-service:v6'
-        registry_order          = '262583979852.dkr.ecr.us-east-1.amazonaws.com/order-service:v6'
-        registry_kitchen        = '262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service:v6'
+        registry_payment        = '262583979852.dkr.ecr.us-east-1.amazonaws.com/payment-service-${TF_VAR_environment}'
+        registry_order          = '262583979852.dkr.ecr.us-east-1.amazonaws.com/order-service-${TF_VAR_environment}'
+        registry_kitchen        = '262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service-${TF_VAR_environment}'
     }
     stages {
+        stage('secrets') {
+            steps {
+                dir("Deployment/"){
+                    sh 'sed "s/ACCESS_REPLACE/$AWS_ACCESS_KEY_ID/" secrets.yaml'
+                    sh 'sed "s/SECRET_REPLACE/$AWS_SECRET_ACCESS_KEY"/ secrets.yaml'
+                    sh 'kubectl apply -f secrets.yaml'
+                }
+            }
+        }
+        //
         stage('Create Infra') {
             when {
                 equals expected: true, actual: params.deploy
@@ -58,15 +68,15 @@ pipeline {
             }
             steps {
                 dir("payment-service/"){
-                    sh "docker build --cache-from payment-service:latest -t payment-service:latest ."
+                    sh "docker build --cache-from payment-service-${TF_VAR_environment}:latest -t payment-service-${TF_VAR_environment}:latest ."
                     //sh "docker pull payment-service:latest"
                     //docker hub publico
                 }
                 dir("order-service/"){
-                    sh "docker build --cache-from order-service:latest -t order-service:latest ."
+                    sh "docker build --cache-from order-service-${TF_VAR_environment}:latest -t order-service-${TF_VAR_environment}:latest ."
                 }
                 dir("kitchen-service/"){
-                    sh "docker build --cache-from kitchen-service:latest -t kitchen-service:latest ."
+                    sh "docker build --cache-from kitchen-service-jimena:latest -t kitchen-service-jimena:latest ."
                 }
             }
         }
@@ -80,8 +90,8 @@ pipeline {
                             def login = ecrLogin()
                             sh "${login}"
                             sh '''docker tag payment-service:latest ${registry_payment}'''
-                            sh '''docker tag kitchen-service:latest ${registry_kitchen}'''
-                            sh '''docker tag order-service:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/order-service'''
+                            sh '''docker tag kitchen-service-jimena:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service-jimena'''
+                            sh '''docker tag order-service:latest ${registry_order}'''
                         }
                 }
             }
@@ -92,8 +102,8 @@ pipeline {
             }
             steps {
                 sh "docker push ${registry_payment}"
-                sh "docker push ${registry_kitchen}"
-                sh "docker push 262583979852.dkr.ecr.us-east-1.amazonaws.com/order-service"
+                sh "docker push 262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service-jimena:latest"
+                sh "docker push ${registry_order}"
             }
         }
         stage('Kubectl') {

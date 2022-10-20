@@ -18,7 +18,7 @@ public class SqsListeners {
     @Autowired
     private IPaymentFacade paymentFacade;
 
-    @SqsListener("ticket_events.fifo")
+    @SqsListener("ticket_events_jimena.fifo")
     public void ticketEvents(String message) throws JsonProcessingException {
 
         TicketEventTO ticket = new ObjectMapper().readValue(message, TicketEventTO.class);
