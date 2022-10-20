@@ -21,7 +21,7 @@ pipeline {
         registry_kitchen        = '262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service-$TF_VAR_environment'
     }
     stages {
-        stage('Create Infra') {
+        /*stage('Create Infra') {
             when {
                 equals expected: true, actual: params.deploy
             }
@@ -31,7 +31,7 @@ pipeline {
                     sh "terraform apply --auto-approve"
                 }
             }
-        }
+        }*/
            stage('secrets') {
             when {
                 equals expected: true, actual: params.deploy
