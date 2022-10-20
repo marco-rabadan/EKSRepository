@@ -92,7 +92,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1666053220859</updated>
-      <workItem from="1666053223165" duration="60461000" />
+      <workItem from="1666053223165" duration="64023000" />
     </task>
     <servers />
   </component>
@@ -115,12 +115,12 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/order-service/order-commons/src/main/java/mx/com/example/commons/stream/SqsQueueSender.java</url>
-          <line>29</line>
+          <line>31</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/order-service/order-commons/src/main/java/mx/com/example/commons/stream/SqsQueueSender.java</url>
-          <line>38</line>
+          <line>47</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">

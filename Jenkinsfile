@@ -21,18 +21,6 @@ pipeline {
         registry_kitchen        = '262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service-$TF_VAR_environment'
     }
     stages {
-        /*stage('secrets') {
-            steps {
-                dir("Deployment/"){
-                    sh 'kubectl apply -f nginx_ingress_services.yaml'
-                    sh "sed -i \"s#ACCESS_REPLACE#$AWS_ACCESS_KEY_ID#g\" secrets.yaml"
-                    sh "sed -i \"s#SECRET_REPLACE#$AWS_SECRET_ACCESS_KEY#g\" secrets.yaml"
-                    sh 'kubectl apply -f secrets.yaml'
-                    sh 'kubectl apply -f ingress-deploy.yaml'
-                }
-            }
-        }*/
-        //
         stage('Create Infra') {
             when {
                 equals expected: true, actual: params.deploy
@@ -41,6 +29,22 @@ pipeline {
                 dir("infra/"){
                     sh "terraform init"
                     sh "terraform apply --auto-approve"
+                }
+            }
+        }
+           stage('secrets') {
+            when {
+                equals expected: true, actual: params.deploy
+            }
+            steps {
+                withAWS(credentials: 'ecr-credentials', region: 'us-east-1') {
+                    dir("Deployment/"){
+                        sh 'kubectl apply -f nginx_ingress_services.yaml'
+                        sh "sed -i \"s#ACCESS_REPLACE#$AWS_ACCESS_KEY_ID#g\" secrets.yaml"
+                        sh "sed -i \"s#SECRET_REPLACE#$AWS_SECRET_ACCESS_KEY#g\" secrets.yaml"
+                        sh 'kubectl apply -f secrets.yaml'
+                        sh 'kubectl apply -f ingress-deploy.yaml'
+                    }
                 }
             }
         }

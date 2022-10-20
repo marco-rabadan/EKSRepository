@@ -29,7 +29,7 @@ public class OrderEventTO extends EventBase {
     @Override
     public String toString() {
         return "{" +
-                "description='" + description + '\'' +
+                "description=" + description +
                 ", quantity=" + quantity +
                 '}';
     }

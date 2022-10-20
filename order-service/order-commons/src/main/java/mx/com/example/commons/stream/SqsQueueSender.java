@@ -1,6 +1,8 @@
 package mx.com.example.commons.stream;
 
 import com.amazonaws.services.sqs.AmazonSQSAsync;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import mx.com.example.commons.to.OrderEventTO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -25,7 +27,7 @@ public class SqsQueueSender {
     @Value(value = "${cloud.aws.endpoint.order.url}")
     private String endPoint;
 
-    public void putMessagedToQueue(OrderEventTO order){
+    public void putMessagedToQueue(OrderEventTO order) {
         // Message for FIFO Queue
         Map<String, Object> headers = new HashMap<>();
         // Message Group ID being set
@@ -33,11 +35,18 @@ public class SqsQueueSender {
         headers.put("contentType",  MimeType.valueOf("application/json"));
         // Below is optional, since Content based de-duplication is enabled
         //headers.put(SqsMessageHeaders.SQS_DEDUPLICATION_ID_HEADER, "2");
-        LOG.info("PUTMESSAGEJSON " + order);
+        ObjectMapper mapper = new ObjectMapper();
+        String sendOrder;
+        try {
+            sendOrder = mapper.writeValueAsString(order);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        LOG.info("SENDORDER " + sendOrder);
         LOG.info("JSONTYPEMIMENEWJSON " + order.toString());
 
         queueMessagingTemplate.send(endPoint,
-                MessageBuilder.withPayload(order.toString()).copyHeaders(headers).build());
+                MessageBuilder.withPayload(sendOrder).copyHeaders(headers).build());
     }
 
 }
