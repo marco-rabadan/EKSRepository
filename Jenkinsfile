@@ -16,9 +16,9 @@ pipeline {
         AWS_ACCOUNT_ID          = "262583979852"
         AWS_DEFAULT_REGION      = "us-east-1" 
         TF_VAR_environment      = 'jimena'
-        registry_payment        = '262583979852.dkr.ecr.us-east-1.amazonaws.com/payment-service-${TF_VAR_environment}'
-        registry_order          = '262583979852.dkr.ecr.us-east-1.amazonaws.com/order-service-${TF_VAR_environment}'
-        registry_kitchen        = '262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service-${TF_VAR_environment}'
+        registry_payment        = '262583979852.dkr.ecr.us-east-1.amazonaws.com/payment-service-$TF_VAR_environment'
+        registry_order          = '262583979852.dkr.ecr.us-east-1.amazonaws.com/order-service-$TF_VAR_environment'
+        registry_kitchen        = '262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service-$TF_VAR_environment'
     }
     stages {
         /*stage('secrets') {
