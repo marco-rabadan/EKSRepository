@@ -63,6 +63,21 @@ spec:
             secretKeyRef:
               name: database
               key: ENDPOINT_TICKETS_SQS
+        - name: PAYMENT_SQS
+          valueFrom:
+            secretKeyRef:
+              name: database
+              key: PAYMENT_SQS
+        - name: TICKETS_SQS
+          valueFrom:
+            secretKeyRef:
+              name: database
+              key: TICKETS_SQS
+        - name: ORDER_SQS
+          valueFrom:
+            secretKeyRef:
+              name: database
+              key: ORDER_SQS
 ---
 apiVersion: v1
 kind: Service
