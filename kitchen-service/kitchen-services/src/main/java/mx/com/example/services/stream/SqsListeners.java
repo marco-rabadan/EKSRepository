@@ -23,7 +23,7 @@ public class SqsListeners {
     // @KafkaListener(topics = "order_events", groupId = "kitchen")
     @SqsListener(value = "${cloud.aws.endpoint.order.name}")
     public void orderEvents(String message) throws JsonProcessingException {
-
+        LOG.info("KITCHENSQSLISTENER" + message);
         OrderEventTO order = new ObjectMapper().readValue(message, OrderEventTO.class);
 
         LOG.info("Received Message Orders");
