@@ -21,7 +21,7 @@ pipeline {
         registry_kitchen        = '262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service-$TF_VAR_environment'
     }
     stages {
-        /*stage('Create Infra') {
+        stage('Create Infra') {
             when {
                 equals expected: true, actual: params.deploy
             }
@@ -31,7 +31,7 @@ pipeline {
                     sh "terraform apply --auto-approve"
                 }
             }
-        }*/
+        }
            stage('secrets') {
             when {
                 equals expected: true, actual: params.deploy
@@ -40,10 +40,6 @@ pipeline {
                 withAWS(credentials: 'ecr-credentials', region: 'us-east-1') {
                     dir("Deployment/"){
                         sh 'aws eks --region us-east-1 update-kubeconfig --name eks-cluster-jimena'
-                        sh 'kubectl apply -f nginx_ingress_services.yaml'
-                        sh "sed -i \"s#ACCESS_REPLACE#$AWS_ACCESS_KEY_ID#g\" secrets.yaml"
-                        sh "sed -i \"s#SECRET_REPLACE#$AWS_SECRET_ACCESS_KEY#g\" secrets.yaml"
-                        sh 'kubectl apply -f secrets.yaml'
                         sh 'kubectl apply -f ingress-deploy.yaml'
                     }
                 }
@@ -122,6 +118,9 @@ pipeline {
                     sh 'aws eks --region us-east-1 update-kubeconfig --name eks-cluster-jimena'
                     sh 'kubectl get pods'
                     dir("Deployment/"){
+                        sh "sed -i \"s#ACCESS_REPLACE#$AWS_ACCESS_KEY_ID#g\" secrets.yaml"
+                        sh "sed -i \"s#SECRET_REPLACE#$AWS_SECRET_ACCESS_KEY#g\" secrets.yaml"
+                        sh 'kubectl apply -f secrets.yaml'
                         sh 'kubectl apply -f Payment-deployment.yaml'
                         sh 'kubectl apply -f Kitchen-deployment.yaml'
                         sh 'kubectl apply -f Order-deployment.yaml'
