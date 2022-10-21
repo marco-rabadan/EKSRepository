@@ -1,7 +1,11 @@
 package mx.com.example.commons.stream;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import mx.com.example.commons.to.OrderEventTO;
 import mx.com.example.commons.to.TicketEventTO;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.aws.messaging.core.QueueMessagingTemplate;
@@ -15,6 +19,8 @@ import java.util.Map;
 @Component
 public class SqsQueueSender {
 
+    static final Logger LOG = LogManager.getLogger(SqsQueueSender.class);
+
     @Autowired
     private QueueMessagingTemplate queueMessagingTemplate;
 
@@ -27,8 +33,17 @@ public class SqsQueueSender {
         headers.put(SqsMessageHeaders.SQS_GROUP_ID_HEADER, "1");
         // Below is optional, since Content based de-duplication is enabled
         //headers.put(SqsMessageHeaders.SQS_DEDUPLICATION_ID_HEADER, "2");
+        ObjectMapper mapper = new ObjectMapper();
+        String sendOrder;
+        try {
+            sendOrder = mapper.writeValueAsString(order);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        LOG.info("SENDORDER " + sendOrder);
+        LOG.info("JSONTYPEMIMENEWJSON " + order.toString());
         queueMessagingTemplate.send(end,
-                MessageBuilder.withPayload(order).copyHeaders(headers).build());
+                MessageBuilder.withPayload(sendOrder).copyHeaders(headers).build());
     }
 
 }
