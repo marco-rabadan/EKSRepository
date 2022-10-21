@@ -15,10 +15,7 @@ pipeline {
         AWS_SECRET_ACCESS_KEY   = credentials('AWS_SECRET_ACCESS_KEY')
         AWS_ACCOUNT_ID          = "262583979852"
         AWS_DEFAULT_REGION      = "us-east-1" 
-        TF_VAR_environment      = 'jimena'
-        registry_payment        = '262583979852.dkr.ecr.us-east-1.amazonaws.com/payment-service-$TF_VAR_environment'
-        registry_order          = '262583979852.dkr.ecr.us-east-1.amazonaws.com/order-service-$TF_VAR_environment'
-        registry_kitchen        = '262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service-$TF_VAR_environment'
+        TF_VAR_environment      = 'mena'
     }
     stages {
         stage('Create Infra') {
@@ -39,7 +36,7 @@ pipeline {
             steps {
                 withAWS(credentials: 'ecr-credentials', region: 'us-east-1') {
                     dir("Deployment/"){
-                        sh 'aws eks --region us-east-1 update-kubeconfig --name eks-cluster-jimena'
+                        sh 'aws eks --region us-east-1 update-kubeconfig --name eks-cluster-${TF_VAR_environment}'
                         sh 'kubectl apply -f ingress-deploy.yaml'
                     }
                 }
@@ -79,7 +76,7 @@ pipeline {
                     sh "docker build --cache-from order-service-${TF_VAR_environment}:latest -t order-service-${TF_VAR_environment}:latest ."
                 }
                 dir("kitchen-service/"){
-                    sh "docker build --cache-from kitchen-service-jimena:latest -t kitchen-service-jimena:latest ."
+                    sh "docker build --cache-from kitchen-service-${TF_VAR_environment}:latest -t kitchen-service-${TF_VAR_environment}:latest ."
                 }
             }
         }
@@ -92,9 +89,9 @@ pipeline {
                         script {
                             def login = ecrLogin()
                             sh "${login}"
-                            sh '''docker tag payment-service-jimena:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/payment-service-jimena'''
-                            sh '''docker tag kitchen-service-jimena:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service-jimena'''
-                            sh '''docker tag order-service-jimena:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/order-service-jimena'''
+                            sh '''docker tag payment-service-${TF_VAR_environment}:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/payment-service-${TF_VAR_environment}'''
+                            sh '''docker tag kitchen-service-${TF_VAR_environment}:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service-${TF_VAR_environment}'''
+                            sh '''docker tag order-service-${TF_VAR_environment}:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/order-service-${TF_VAR_environment}'''
                         }
                 }
             }
@@ -104,9 +101,9 @@ pipeline {
                 equals expected: true, actual: params.microservices
             }
             steps {
-                sh "docker push 262583979852.dkr.ecr.us-east-1.amazonaws.com/payment-service-jimena:latest"
-                sh "docker push 262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service-jimena:latest"
-                sh "docker push 262583979852.dkr.ecr.us-east-1.amazonaws.com/order-service-jimena:latest"
+                sh "docker push 262583979852.dkr.ecr.us-east-1.amazonaws.com/payment-service-${TF_VAR_environment}:latest"
+                sh "docker push 262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service-${TF_VAR_environment}:latest"
+                sh "docker push 262583979852.dkr.ecr.us-east-1.amazonaws.com/order-service-${TF_VAR_environment}:latest"
             }
         }
         stage('Kubectl') {
@@ -115,7 +112,7 @@ pipeline {
             }
             steps {
                 withAWS(credentials: 'ecr-credentials', region: 'us-east-1') {
-                    sh 'aws eks --region us-east-1 update-kubeconfig --name eks-cluster-jimena'
+                    sh 'aws eks --region us-east-1 update-kubeconfig --name eks-cluster-${TF_VAR_environment}'
                     sh 'kubectl get pods'
                     dir("Deployment/"){
                         sh "sed -i \"s#ACCESS_REPLACE#$AWS_ACCESS_KEY_ID#g\" secrets.yaml"
