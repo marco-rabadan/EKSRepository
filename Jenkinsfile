@@ -15,7 +15,7 @@ pipeline {
         AWS_SECRET_ACCESS_KEY   = credentials('AWS_SECRET_ACCESS_KEY')
         AWS_ACCOUNT_ID          = "262583979852"
         AWS_DEFAULT_REGION      = "us-east-1" 
-        TF_VAR_environment      = 'mena'
+        TF_VAR_environment      = 'menadocker'
     }
     stages {
         stage('Create Infra') {
@@ -62,7 +62,7 @@ pipeline {
                 }
             }
         }
-        stage("Docker Build") {
+        /*stage("Docker Build") {
             when {
                 equals expected: true, actual: params.microservices
             }
@@ -79,6 +79,23 @@ pipeline {
                     sh "docker build --cache-from kitchen-service-${TF_VAR_environment}:latest -t kitchen-service-${TF_VAR_environment}:latest ."
                 }
             }
+        }*/
+        stage("Docker Pull") {
+            when {
+                equals expected: true, actual: params.microservices
+            }
+            steps {
+                dir("payment-service/"){
+                    sh "docker pull payment-service:latest"
+                    //sh "docker pull payment-service:latest"
+                }
+                /*dir("order-service/"){
+                    sh "docker build --cache-from order-service-${TF_VAR_environment}:latest -t order-service-${TF_VAR_environment}:latest ."
+                }
+                dir("kitchen-service/"){
+                    sh "docker build --cache-from kitchen-service-${TF_VAR_environment}:latest -t kitchen-service-${TF_VAR_environment}:latest ."
+                }*/
+            }
         }
         stage('Logging into AWS ECR') {
             when {
@@ -89,9 +106,9 @@ pipeline {
                         script {
                             def login = ecrLogin()
                             sh "${login}"
-                            sh '''docker tag payment-service-${TF_VAR_environment}:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/payment-service-${TF_VAR_environment}'''
-                            sh '''docker tag kitchen-service-${TF_VAR_environment}:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service-${TF_VAR_environment}'''
-                            sh '''docker tag order-service-${TF_VAR_environment}:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/order-service-${TF_VAR_environment}'''
+                            sh '''docker tag payment-service:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/payment-service-${TF_VAR_environment}'''
+                            //sh '''docker tag kitchen-service-${TF_VAR_environment}:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service-${TF_VAR_environment}'''
+                            //sh '''docker tag order-service-${TF_VAR_environment}:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/order-service-${TF_VAR_environment}'''
                         }
                 }
             }
@@ -102,8 +119,8 @@ pipeline {
             }
             steps {
                 sh "docker push 262583979852.dkr.ecr.us-east-1.amazonaws.com/payment-service-${TF_VAR_environment}:latest"
-                sh "docker push 262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service-${TF_VAR_environment}:latest"
-                sh "docker push 262583979852.dkr.ecr.us-east-1.amazonaws.com/order-service-${TF_VAR_environment}:latest"
+                //sh "docker push 262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service-${TF_VAR_environment}:latest"
+                //sh "docker push 262583979852.dkr.ecr.us-east-1.amazonaws.com/order-service-${TF_VAR_environment}:latest"
             }
         }
         stage('Kubectl') {
@@ -115,13 +132,13 @@ pipeline {
                     sh 'aws eks --region us-east-1 update-kubeconfig --name eks-cluster-${TF_VAR_environment}'
                     sh 'kubectl get pods'
                     dir("Deployment/"){
-                        sh "sed -i \"s#ACCESS_REPLACE#$AWS_ACCESS_KEY_ID#g\" secrets.yaml"
-                        sh "sed -i \"s#SECRET_REPLACE#$AWS_SECRET_ACCESS_KEY#g\" secrets.yaml"
-                        sh 'kubectl apply -f secrets.yaml'
+                        //sh "sed -i \"s#ACCESS_REPLACE#$AWS_ACCESS_KEY_ID#g\" secrets.yaml"
+                        //sh "sed -i \"s#SECRET_REPLACE#$AWS_SECRET_ACCESS_KEY#g\" secrets.yaml"
+                        //sh 'kubectl apply -f secrets.yaml'
                         sh 'kubectl apply -f Payment-deployment.yaml'
-                        sh 'kubectl apply -f Kitchen-deployment.yaml'
-                        sh 'kubectl apply -f Order-deployment.yaml'
-                        sh 'kubectl apply -f nginx_ingress_services.yaml'
+                        //sh 'kubectl apply -f Kitchen-deployment.yaml'
+                        //sh 'kubectl apply -f Order-deployment.yaml'
+                        //sh 'kubectl apply -f nginx_ingress_services.yaml'
                     }
                 }
             }
