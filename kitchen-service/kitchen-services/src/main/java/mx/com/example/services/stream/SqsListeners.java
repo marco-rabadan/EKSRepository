@@ -36,7 +36,7 @@ public class SqsListeners {
     }
 
     //@KafkaListener(topics = "payment_events", groupId = "kitchen")
-    @SqsListener(value = "${cloud.aws.endpoint.payment.name}")
+    @SqsListener(value = "${cloud.aws.endpoint.paymentkitchen.name}")
     public void paymentEvents(String message) throws JsonProcessingException {
 
         PaymentEventTO payment = new ObjectMapper().readValue(message, PaymentEventTO.class);

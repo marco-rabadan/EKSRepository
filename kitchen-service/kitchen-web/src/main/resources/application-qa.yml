@@ -43,9 +43,9 @@ cloud:
       tickets:
         url: ${ENDPOINT_TICKETS_SQS}
         name: ${TICKETS_SQS}
-      payment:
-        url: ${ENDPOINT_PAYMENT_SQS}
-        name: ${PAYMENT_SQS}
+      paymentkitchen:
+        url: ${ENDPOINT_PAYMENT_KITCHEN_SQS}
+        name: ${PAYMENT_KITCHEN_SQS}
       order:
         url: ${ENDPOINT_ORDER_SQS}
         name: ${ORDER_SQS}

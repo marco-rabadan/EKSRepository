@@ -26,8 +26,11 @@ public class SqsQueueSender {
     @Autowired
     private QueueMessagingTemplate queueMessagingTemplate;
 
-    @Value(value = "${cloud.aws.endpoint.payment.url}")
-    private String endPoint;
+    @Value(value = "${cloud.aws.paymentorder.url}")
+    private String endPointOrder;
+
+    @Value(value = "${cloud.aws.paymentkitchen.url}")
+    private String endPointKitchen;
 
     public void putMessagedToQueue(PaymentEventTO payment){
         // Message for FIFO Queue
@@ -35,7 +38,6 @@ public class SqsQueueSender {
         // Message Group ID being set
         headers.put(SqsMessageHeaders.SQS_GROUP_ID_HEADER, "1");
         // Below is optional, since Content based de-duplication is enabled
-        headers.put(SqsMessageHeaders.SQS_DEDUPLICATION_ID_HEADER, "2");
         ObjectMapper mapper = new ObjectMapper();
         String sendPayment;
         try {
@@ -44,7 +46,10 @@ public class SqsQueueSender {
             throw new RuntimeException(e);
         }
         LOG.info("SENDORDER " + sendPayment);
-        queueMessagingTemplate.send(endPoint,
+        queueMessagingTemplate.send(endPointOrder,
+                MessageBuilder.withPayload(sendPayment).copyHeaders(headers).build());
+        LOG.info("SENDKITCHEN " + sendPayment);
+        queueMessagingTemplate.send(endPointKitchen,
                 MessageBuilder.withPayload(sendPayment).copyHeaders(headers).build());
     }
 
