@@ -87,7 +87,7 @@ pipeline {
             steps {
                 withAWS(credentials: 'ecr-credentials', region: 'us-east-1') {
                     script {
-                        sh "docker pull payment-service:latest"
+                        sh "docker pull jimenarodriguez/payment-service:latest"
                         //sh "docker pull payment-service:latest"
                         /*dir("order-service/"){
                             sh "docker build --cache-from order-service-${TF_VAR_environment}:latest -t order-service-${TF_VAR_environment}:latest ."
