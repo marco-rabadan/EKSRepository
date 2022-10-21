@@ -96,6 +96,7 @@ pipeline {
                             sh "docker build --cache-from kitchen-service-${TF_VAR_environment}:latest -t kitchen-service-${TF_VAR_environment}:latest ."
                         }*/
                     }
+                }
             }
         }
         stage('Logging into AWS ECR') {
