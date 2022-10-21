@@ -21,3 +21,6 @@ output "rdsarn" {
 output "rdsid" {
   value = aws_db_instance.terraform_rds.id
 }
+output "rdsendpoint" {
+  value = aws_db_instance.terraform_rds.endpoint
+}
