@@ -48,11 +48,16 @@ spec:
             secretKeyRef:
               name: database
               key: RDS_PASS
-        - name: ENDPOINT_PAYMENT_SQS
+        - name: ENDPOINT_PAYMENT_ORDER_SQS
           valueFrom:
             secretKeyRef:
               name: database
-              key: ENDPOINT_PAYMENT_SQS
+              key: ENDPOINT_PAYMENT_ORDER_SQS
+        - name: ENDPOINT_PAYMENT_KITCHEN_SQS
+          valueFrom:
+            secretKeyRef:
+              name: database
+              key: ENDPOINT_PAYMENT_KITCHEN_SQS
         - name: ENDPOINT_ORDER_SQS
           valueFrom:
             secretKeyRef:
@@ -63,11 +68,16 @@ spec:
             secretKeyRef:
               name: database
               key: ENDPOINT_TICKETS_SQS
-        - name: PAYMENT_SQS
+        - name: PAYMENT_ORDER_SQS
           valueFrom:
             secretKeyRef:
               name: database
-              key: PAYMENT_SQS
+              key: PAYMENT_ORDER_SQS
+        - name: PAYMENT_KITCHEN_SQS
+          valueFrom:
+            secretKeyRef:
+              name: database
+              key: PAYMENT_KITCHEN_SQS
         - name: TICKETS_SQS
           valueFrom:
             secretKeyRef:

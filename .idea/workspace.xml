@@ -4,18 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54b9ae4d-a41c-48be-aa27-5ee36ddf17a7" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Deployment/secrets.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Deployment/secrets.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kitchen-service/kitchen-services/src/main/java/mx/com/example/services/stream/SqsListeners.java" beforeDir="false" afterPath="$PROJECT_DIR$/kitchen-service/kitchen-services/src/main/java/mx/com/example/services/stream/SqsListeners.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kitchen-service/kitchen-web/src/main/resources/application-qa.yml" beforeDir="false" afterPath="$PROJECT_DIR$/kitchen-service/kitchen-web/src/main/resources/application-qa.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kitchen-service/kitchen-web/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/kitchen-service/kitchen-web/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/order-services/src/main/java/mx/com/example/services/stream/SqsListeners.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/order-services/src/main/java/mx/com/example/services/stream/SqsListeners.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/order-web/src/main/resources/application-qa.yml" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/order-web/src/main/resources/application-qa.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/order-web/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/order-web/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment-service/payment-commons/src/main/java/mx/com/example/commons/stream/SqsQueueSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/payment-service/payment-commons/src/main/java/mx/com/example/commons/stream/SqsQueueSender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment-service/payment-web/src/main/resources/application-qa.yml" beforeDir="false" afterPath="$PROJECT_DIR$/payment-service/payment-web/src/main/resources/application-qa.yml" afterDir="false" />
-    </list>
+    <list default="true" id="54b9ae4d-a41c-48be-aa27-5ee36ddf17a7" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -99,7 +88,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1666053220859</updated>
-      <workItem from="1666053223165" duration="72657000" />
+      <workItem from="1666053223165" duration="73271000" />
     </task>
     <servers />
   </component>
