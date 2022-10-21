@@ -85,16 +85,17 @@ pipeline {
                 equals expected: true, actual: params.microservices
             }
             steps {
-                dir("payment-service/"){
-                    sh "docker pull payment-service:latest"
-                    //sh "docker pull payment-service:latest"
-                }
-                /*dir("order-service/"){
-                    sh "docker build --cache-from order-service-${TF_VAR_environment}:latest -t order-service-${TF_VAR_environment}:latest ."
-                }
-                dir("kitchen-service/"){
-                    sh "docker build --cache-from kitchen-service-${TF_VAR_environment}:latest -t kitchen-service-${TF_VAR_environment}:latest ."
-                }*/
+                withAWS(credentials: 'ecr-credentials', region: 'us-east-1') {
+                    script {
+                        sh "docker pull payment-service:latest"
+                        //sh "docker pull payment-service:latest"
+                        /*dir("order-service/"){
+                            sh "docker build --cache-from order-service-${TF_VAR_environment}:latest -t order-service-${TF_VAR_environment}:latest ."
+                        }
+                        dir("kitchen-service/"){
+                            sh "docker build --cache-from kitchen-service-${TF_VAR_environment}:latest -t kitchen-service-${TF_VAR_environment}:latest ."
+                        }*/
+                    }
             }
         }
         stage('Logging into AWS ECR') {
