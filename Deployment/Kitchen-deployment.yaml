@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: kitchen-container
-        image: 262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service-mena:latest
+        image: 262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service-avi:latest
         ports:
         - containerPort: 8200
         imagePullPolicy: Always
