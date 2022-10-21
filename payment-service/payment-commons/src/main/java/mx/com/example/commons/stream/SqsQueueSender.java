@@ -35,7 +35,7 @@ public class SqsQueueSender {
         // Message Group ID being set
         headers.put(SqsMessageHeaders.SQS_GROUP_ID_HEADER, "1");
         // Below is optional, since Content based de-duplication is enabled
-        //headers.put(SqsMessageHeaders.SQS_DEDUPLICATION_ID_HEADER, "2");
+        headers.put(SqsMessageHeaders.SQS_DEDUPLICATION_ID_HEADER, "2");
         ObjectMapper mapper = new ObjectMapper();
         String sendPayment;
         try {

@@ -9,9 +9,8 @@ resource "aws_sqs_queue" "order_events" {
   content_based_deduplication = true
 }
 resource "aws_sqs_queue" "payment_events" {
-  name                        = "payment_events_${var.environment}.fifo"
-  fifo_queue                  = true
-  content_based_deduplication = true
+  name                        = "payment_events_${var.environment}"
+  fifo_queue                  = false
 }
 
 output "ticket_events_url" {
