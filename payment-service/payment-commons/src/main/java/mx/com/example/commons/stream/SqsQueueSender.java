@@ -26,10 +26,10 @@ public class SqsQueueSender {
     @Autowired
     private QueueMessagingTemplate queueMessagingTemplate;
 
-    @Value(value = "${cloud.aws.paymentorder.url}")
+    @Value(value = "${cloud.aws.endpoint.paymentorder.url}")
     private String endPointOrder;
 
-    @Value(value = "${cloud.aws.paymentkitchen.url}")
+    @Value(value = "${cloud.aws.endpoint.paymentkitchen.url}")
     private String endPointKitchen;
 
     public void putMessagedToQueue(PaymentEventTO payment){
