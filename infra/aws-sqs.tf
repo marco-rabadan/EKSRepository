@@ -10,11 +10,13 @@ resource "aws_sqs_queue" "order_events" {
 }
 resource "aws_sqs_queue" "payment_order_events" {
   name                        = "payment_order_events_${var.environment}.fifo"
-  fifo_queue                  = false
+  fifo_queue                  = true
+  content_based_deduplication = true
 }
 resource "aws_sqs_queue" "payment_kitchen_events" {
   name                        = "payment_kitchen_events_${var.environment}.fifo"
-  fifo_queue                  = false
+  fifo_queue                  = true
+  content_based_deduplication = true
 }
 
 output "ticket_events_url" {
