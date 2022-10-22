@@ -110,9 +110,9 @@ pipeline {
                         script {
                             def login = ecrLogin()
                             sh "${login}"
-                            sh '''docker tag payment-service:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/payment-service-${TF_VAR_environment}'''
-                            sh '''docker tag kitchen-service:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service-${TF_VAR_environment}'''
-                            sh '''docker tag order-service:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/order-service-${TF_VAR_environment}'''
+                            sh '''docker tag jimenarodriguez/payment-service:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/payment-service-${TF_VAR_environment}'''
+                            sh '''docker tag jimenarodriguez/kitchen-service:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/kitchen-service-${TF_VAR_environment}'''
+                            sh '''docker tag jimenarodriguez/order-service:latest 262583979852.dkr.ecr.us-east-1.amazonaws.com/order-service-${TF_VAR_environment}'''
                         }
                 }
             }
